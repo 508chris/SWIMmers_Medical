@@ -15,9 +15,9 @@
   <tr>
     <th><a href="#">New</a></th>
     <th></th>
-    <th>medication id</th>
-    <th>medication name</th>
-    <th>medication type</th>
+    <th>Medication ID </th>
+    <th>Medication Name</th>
+    <th>Medication Type</th>
   </tr>
   <tr>
     <td><a href="#">Edit</a></td>
@@ -37,7 +37,7 @@
     <td><a href="#">Edit</a></td>
     <td><a href="#">Delete</a></td>
     <td>3</td>
-    <td>Adderal</td>
+    <td>Adderall</td>
     <td>Stimulant</td>
   </tr>
 </table>
@@ -47,12 +47,13 @@
     <form id="addMedication">
         <legend><strong>Add Medication</strong></legend>
           <fieldset class="fields">
-            <label> medication id </label> <input type="number" name="medication_id">
-            <label> medication name </label> <input type="text" name="medication_name">
-            <label> medication type </label> <input type="text" name="medication_type">
+            <label> Medication ID </label> <input type="number" name="medication_id">
+            <label> Medication Name </label> <input type="text" name="medication_name">
+            <label> Medication Type </label> <input type="text" name="medication_type">
           </fieldset>
-          <input class="btn" type="submit" id="addMedication" value="Add a Medication">
-          <input class="btn" type="button" value="cancel">
+          <br>
+          <input class="btn" type="submit" id="addMedication" value="Add Medication">
+          <input class="btn" type="button" value="Cancel">
 	</form> <!--add new planet-->
 </div><!-- insert -->
 
@@ -61,12 +62,13 @@
   <form id="updateMedication">
       <legend><strong>Update Medication</strong></legend>
           <fieldset class="fields">
-            <label> medication id </label> <input type="number" value="1" name="medication_id">
-            <label> medication name</label> <input type="text"  name="medication_name" value="Alkaline">
-            <label> medication type </label> <input type="text" name="medication_type" value="Opioid">
+            <label> Medication ID </label> <input type="number" value="1" name="medication_id">
+            <label> Medication Name</label> <input type="text"  name="medication_name" value="Alkaline">
+            <label> Medication Type </label> <input type="text" name="medication_type" value="Opioid">
     </fieldset>
-    <input class="btn" type="submit" id="UpdateSaveMedication" value="Save Update Medication">
-          <input class="btn" type="button" value="cancel" >
+    <br>
+    <input class="btn" type="submit" id="UpdateSaveMedication" value="Update Medication">
+          <input class="btn" type="button" value="Cancel" >
   </form> 
 </div><!-- update -->
 <p>&nbsp;</p>
@@ -75,12 +77,14 @@
       <legend><strong>Delete Medication</strong></legend>
           <fieldset class="fields">
           <p>Are you sure you wish to delete the following?</p>
-          <label><strong>medication id:</strong></label> 1
-          <label><strong>medication name:</strong></label> Alkaline
+          <label><strong>Medication ID:</strong></label> 1
+          <br>
+          <label><strong>Medication Name:</strong></label> Alkaline
             
     </fieldset>
+    <br>
     <input class="btn" type="submit" id="deleteMedication" value="Delete Medication">
-          <input class="btn" type="button" value="cancel" >
+          <input class="btn" type="button" value="Cancel" >
   </form> 
 </div><!-- delete -->
 </body>

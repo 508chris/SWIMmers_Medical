@@ -15,10 +15,10 @@
   <tr>
     <th><a href="#">New</a></th>
     <th></th>
-    <th>script id</th>
-    <th>medication id</th>
-    <th>dosage</th>
-    <th>refill amount</th>
+    <th>Prescription ID</th>
+    <th>Medication ID</th>
+    <th>Dosage</th>
+    <th>Refill amount</th>
   </tr>
   <tr>
     <td><a href="#">Edit</a></td>
@@ -51,13 +51,14 @@
     <form id="addPrescription">
         <legend><strong>Add Prescription</strong></legend>
           <fieldset class="fields">
-            <label> script id </label> <input type="number" name="script_id">
-            <label> medication id </label> <input type="number" name="medication_id">
-            <label> dosage </label> <input type="text" name="dosage">
-            <label> refill amount </label> <input type="number" name="refill_amt">
+            <label> Prescription ID </label> <input type="number" name="script_id">
+            <label> Medication ID </label> <input type="number" name="medication_id">
+            <label> Dosage </label> <input type="text" name="dosage">
+            <label> Refill Amount </label> <input type="number" name="refill_amt">
           </fieldset>
-          <input class="btn" type="submit" id="addPrescription" value="Add a Prescription">
-          <input class="btn" type="button" value="cancel">
+          <br>
+          <input class="btn" type="submit" id="addPrescription" value="Add Prescription">
+          <input class="btn" type="button" value="Cancel">
 	</form> <!--add new planet-->
 </div><!-- insert -->
 
@@ -66,13 +67,14 @@
   <form id="updatePrescription">
       <legend><strong>Update Prescription</strong></legend>
           <fieldset class="fields">
-            <label> script id </label> <input type="number" value="1" name="script_id">
-            <label> medication id </label> <input type="number"  name="medication_id" value="2">
-            <label> dosage </label> <input type="text" name="dosage" value="Take 1 tablet every morning">
-            <label> refill amount </label> <input type="number" name="refill_amt" value="7">
+            <label> Prescription ID </label> <input type="number" value="1" name="script_id">
+            <label> Medication ID </label> <input type="number"  name="medication_id" value="2">
+            <label> Dosage </label> <input type="text" name="dosage" value="Take 1 tablet every morning">
+            <label> Refill Amount </label> <input type="number" name="refill_amt" value="7">
     </fieldset>
-    <input class="btn" type="submit" id="UpdateSavePrescription" value="Save Update Prescription">
-          <input class="btn" type="button" value="cancel" >
+    <br>
+    <input class="btn" type="submit" id="UpdateSavePrescription" value="Update Prescription">
+          <input class="btn" type="button" value="Cancel" >
   </form> 
 </div><!-- update -->
 <p>&nbsp;</p>
@@ -81,11 +83,14 @@
       <legend><strong>Delete Prescription</strong></legend>
           <fieldset class="fields">
           <p>Are you sure you wish to delete the following?</p>
-          <label>script id:</label> 1
+          <label><strong>Prescription ID</strong>:</label> 1
+          <br>
+          <label><strong>Medication ID:</strong></label> 2
             
     </fieldset>
+    <br>
     <input class="btn" type="submit" id="deletePrescription" value="Delete Prescription">
-          <input class="btn" type="button" value="cancel" >
+          <input class="btn" type="button" value="Cancel" >
   </form> 
 </div><!-- delete -->
 </body>

@@ -14,14 +14,14 @@
   <tr>
     <th><a href="#">New</a></th>
     <th></th>
-    <th>patient id</th>
-    <th>first name</th>
-    <th>last name</th>
-    <th>dob</th>
-    <th>address</th>
-    <th>email</th>
-    <th>phone number</th>
-    <th>insurance</th>
+    <th>Patient ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>DOB</th>
+    <th>Address</th>
+    <th>Email</th>
+    <th>Phone Number</th>
+    <th>Insurance</th>
   </tr>
   <tr>
     <td><a href="#">Edit</a></td>
@@ -66,16 +66,17 @@
     <form id="addPatient">
         <legend><strong>Add Patient</strong></legend>
           <fieldset class="fields">
-            <label> first name </label> <input type="text" name="first_name">
-            <label> last name </label> <input type="text" name="last_name">
-            <label> dob </label> <input type="date" name="dob">
-            <label> address </label> <input type="text" name="address">
-            <label> email </label> <input type="text" name="email">
-            <label> phone number </label> <input type="tel" name="phone_number">
-            <label> insurance </label> <input type="text" name="insurance">
+            <label> First Name </label> <input type="text" name="first_name">
+            <label> Last Name </label> <input type="text" name="last_name">
+            <label> DOB </label> <input type="date" name="dob">
+            <label> Address </label> <input type="text" name="address">
+            <label> Email </label> <input type="text" name="email">
+            <label> Phone Number </label> <input type="tel" name="phone_number">
+            <label> Insurance </label> <input type="text" name="insurance">
           </fieldset>
+          <br>
           <input class="btn" type="submit" id="addPatient" value="Add Patient">
-          <input class="btn" type="button" value="cancel">
+          <input class="btn" type="button" value="Cancel">
 	</form> 
 </div><!-- insert -->
 <p>&nbsp;</p>
@@ -83,17 +84,18 @@
     <form id="UpdatePatient" display="display: block">
         <legend><strong>Update Patient</strong></legend>
           <fieldset class="fields">
-          <label> ID: </label> 1
-            <label> first name </label> <input type="text" name="first_name" value="Jane">
-            <label> last name </label> <input type="text" name="last_name" value="Doe">
-            <label> dob </label> <input type="date" name="dob" value="1980-11-11">
-            <label> address </label> <input type="text" name="address" value="55 Amber Ln">
-            <label> email </label> <input type="text" name="email" value="jdoe@gmail.com">
-            <label> phone number </label> <input type="tel" name="phone_number" value="7747755678">
-            <label> insurance </label> <input type="text" name="insurance" value="Med Monkeys">
+          <label> Patient ID: </label> 1
+            <label> First Name </label> <input type="text" name="first_name" value="Jane">
+            <label> Last Name </label> <input type="text" name="last_name" value="Doe">
+            <label> DOB </label> <input type="date" name="dob" value="1980-11-11">
+            <label> Address </label> <input type="text" name="address" value="55 Amber Ln">
+            <label> Email </label> <input type="text" name="email" value="jdoe@gmail.com">
+            <label> Phone Number </label> <input type="tel" name="phone_number" value="7747755678">
+            <label> Insurance </label> <input type="text" name="insurance" value="Med Monkeys">
       </fieldset>
-          <input class="btn" type="submit" id="UpdateSavePatient" value="Save Update Patient">
-          <input class="btn" type="button" value="cancel">
+      <br>
+          <input class="btn" type="submit" id="UpdateSavePatient" value="Update Patient">
+          <input class="btn" type="button" value="Cancel">
 	</form> 
 </div><!-- update -->
 <p>&nbsp;</p>
@@ -103,12 +105,14 @@
           <fieldset class="fields">
           <p>Are you sure you wish to delete the following?</p>
           <input type="hidden" name="patientID" id="deletepatientID" value="1">
-          <label><strong>patient id:</strong></label> 1
-            <label> <strong>Full Name</strong> </label> Jane Doe
+          <label><strong>Patient ID:</strong></label> 1
+          <br>
+            <label> <strong>Full Name</strong></label> Jane Doe
             
     </fieldset>
+    <br>
     <input class="btn" type="submit" id="DeletePatient" value="Delete Patient">
-          <input class="btn" type="button" value="cancel">
+          <input class="btn" type="button" value="Cancel">
   </form> 
 </div><!-- delete -->
 
