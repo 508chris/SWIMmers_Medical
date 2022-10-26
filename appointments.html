@@ -7,7 +7,7 @@
 <body>
 <h1>Appointments</h1>
 
-[ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html"></a> Medications | <a href="appts_has_scripts.html">Appointment Prescriptions</a>]
+[ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html">Medications</a> | <a href="appts_has_scripts.html">Appointment Prescriptions</a> ]
 <div id="browse" style="display: block">
 <p><strong>Browse Appointments</strong></p>
 <table border="1" cellpadding="5">
@@ -16,7 +16,7 @@
     <th></th>
     <th>Appointment ID</th>
     <th>Appointment Reason</th>
-    <th>Date</th>
+    <th>Appointment Date</th>
     <th>Patient ID</th>
     <th>Doctor ID</th>
   </tr>
@@ -35,7 +35,7 @@
     <td align="right" >2</td>
     <td>Patient has acne</td>
     <td align="right" >2000-05-20 02:45:00</td>
-    <td >3</td>
+    <td>3</td>
     <td>2</td>
   </tr>
   <tr>
@@ -52,12 +52,15 @@
 </div> <!-- browse -->
 <div id="insert" style="display: block">
     <form id="addPlanet">
-        <legend><strong>Add Planet</strong></legend>
+        <legend><strong>Add Appointment</strong></legend>
           <fieldset class="fields">
             <label> Reason</label> <input type="text" name="reason">
-            <label> Date</label> <input type="text" name="date">
-            <label> Patient ID</label> <input type="text" name="patient_id">
-            <label> Doctor ID </label> <input type="text" name="doctor_id">
+            <br/>
+            <label> Appointment Date</label> <input type="datetime-local" name="date">
+            <br/>
+            <label> Patient</label> <input type="text" name="patient">
+            <br/>
+            <label> Doctor</label> <input type="text" name="doctor">
           </fieldset>
           <br/>
           <input class="btn" type="submit" id="addAppointment" value="Add New Appointment">
@@ -71,10 +74,14 @@
       <legend><strong>Update Appointment</strong></legend>
           <fieldset class="fields">
           <label>Appointment ID:</label> 1
-            <label> Reason </label> <input type="text" value="Patient had heart attack" name="reason">
-            <label> Date </label> <input type="text"  name="date" value="2000-05-20 02:45:00">
-            <label> Patient ID </label> <input type="number" name="patient_id" value="2">
-            <label> Doctor ID </label> <input type="number" name="doctor_id" value="1">
+          <br/>
+            <label> Reason: </label> <input type="text" value="Patient had heart attack" name="reason">
+            <br/>
+            <label> Appointment Date: </label> <input type="datetime-local"  name="date" value="2000-05-20 02:45:00">
+            <br/>
+            <label> Patient ID: </label> <input type="number" name="patient_id" value="2">
+            <br/>
+            <label> Doctor ID: </label> <input type="number" name="doctor_id" value="1">
     </fieldset>
     <br/>
     <input class="btn" type="submit" id="saveAppointment" value="Update Appointment">
@@ -89,7 +96,7 @@
           <p>Are you sure you wish to delete the following?</p>
           <label><strong>Appointment ID:</strong></label> 1
           <br>
-          <label><strong>Date:</strong></label> 2000-05-20 02:45:00
+          <label><strong>Appointment Date:</strong></label> 2000-05-20 02:45:00
             
     </fieldset>
     <br/>
