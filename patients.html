@@ -8,19 +8,19 @@
 <h1>Patients</h1>
 
 [ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html">Medications</a> | <a href="appts_has_scripts.html">Appointment Prescriptions</a>]
-
+<p><strong>Browse Prescriptions</strong></p>
 <div id="browse" style='display: block'>
 <table border="1" cellpadding="5">
   <tr>
     <th><a href="#">New</a></th>
     <th></th>
-    <th>patient_id</th>
-    <th>first_name</th>
-    <th>last_name</th>
+    <th>patient id</th>
+    <th>first name</th>
+    <th>last name</th>
     <th>dob</th>
     <th>address</th>
     <th>email</th>
-    <th>phone_number</th>
+    <th>phone number</th>
     <th>insurance</th>
   </tr>
   <tr>
@@ -71,7 +71,7 @@
             <label> dob </label> <input type="date" name="dob">
             <label> address </label> <input type="text" name="address">
             <label> email </label> <input type="text" name="email">
-            <label> phone_number </label> <input type="tel" name="phone_number">
+            <label> phone number </label> <input type="tel" name="phone_number">
             <label> insurance </label> <input type="text" name="insurance">
           </fieldset>
           <input class="btn" type="submit" id="addPatient" value="Add Patient">
@@ -89,7 +89,7 @@
             <label> dob </label> <input type="date" name="dob" value="1980-11-11">
             <label> address </label> <input type="text" name="address" value="55 Amber Ln">
             <label> email </label> <input type="text" name="email" value="jdoe@gmail.com">
-            <label> phone_number </label> <input type="tel" name="phone_number" value="7747755678">
+            <label> phone number </label> <input type="tel" name="phone_number" value="7747755678">
             <label> insurance </label> <input type="text" name="insurance" value="Med Monkeys">
       </fieldset>
           <input class="btn" type="submit" id="UpdateSavePatient" value="Save Update Patient">
@@ -103,8 +103,8 @@
           <fieldset class="fields">
           <p>Are you sure you wish to delete the following?</p>
           <input type="hidden" name="patientID" id="deletepatientID" value="1">
-          <label><strong>ID:</strong></label> 1
-            <label> <strong>Name</strong> </label> Jane Doe
+          <label><strong>patient id:</strong></label> 1
+            <label> <strong>Full Name</strong> </label> Jane Doe
             
     </fieldset>
     <input class="btn" type="submit" id="DeletePatient" value="Delete Patient">
