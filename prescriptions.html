@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>Prescriptions</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>Prescriptions</h1>
+
+[ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html">Medications</a> | <a href="appts_has_scripts.html">Appointment Prescriptions</a>]
+
+<div id="browse" style="display: block">
+<p><strong>Browse Prescriptions</strong></p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th><a href="#">New</a></th>
+    <th></th>
+    <th>Prescription ID</th>
+    <th>Medication ID</th>
+    <th>Dosage</th>
+    <th>Refill amount</th>
+  </tr>
+  <tr>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+    <td>1</td>
+    <td>2</td>
+    <td>Take 1 tablet every morning</td>
+    <td>7</td>
+  </tr>
+  <tr>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+    <td>2</td>
+    <td>3</td>
+    <td>Take 2 tablets per day, once in the morning and once at night</td>
+    <td >5</td>
+  </tr>
+  <tr>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+    <td>3</td>
+    <td>1</td>
+    <td>Take 1 tablet at lunch after eating</td>
+    <td>2</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert" style="display: block">
+    <form id="addPrescription">
+        <legend><strong>Add Prescription</strong></legend>
+          <fieldset class="fields">
+            <label> Prescription ID </label> <input type="number" name="script_id">
+            <label> Medication ID </label> <input type="number" name="medication_id">
+            <label> Dosage </label> <input type="text" name="dosage">
+            <label> Refill Amount </label> <input type="number" name="refill_amt">
+          </fieldset>
+          <br>
+          <input class="btn" type="submit" id="addPrescription" value="Add Prescription">
+          <input class="btn" type="button" value="Cancel">
+	</form> <!--add new planet-->
+</div><!-- insert -->
+
+<p>&nbsp;</p>
+<div id="update" style="display: block">
+  <form id="updatePrescription">
+      <legend><strong>Update Prescription</strong></legend>
+          <fieldset class="fields">
+            <label> Prescription ID </label> <input type="number" value="1" name="script_id">
+            <label> Medication ID </label> <input type="number"  name="medication_id" value="2">
+            <label> Dosage </label> <input type="text" name="dosage" value="Take 1 tablet every morning">
+            <label> Refill Amount </label> <input type="number" name="refill_amt" value="7">
+    </fieldset>
+    <br>
+    <input class="btn" type="submit" id="UpdateSavePrescription" value="Update Prescription">
+          <input class="btn" type="button" value="Cancel" >
+  </form> 
+</div><!-- update -->
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form id="deletePrescription">
+      <legend><strong>Delete Prescription</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <label><strong>Prescription ID</strong>:</label> 1
+          <br>
+          <label><strong>Medication ID:</strong></label> 2
+            
+    </fieldset>
+    <br>
+    <input class="btn" type="submit" id="deletePrescription" value="Delete Prescription">
+          <input class="btn" type="button" value="Cancel" >
+  </form> 
+</div><!-- delete -->
+</body>
+</html>
