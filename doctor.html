@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Doctors</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>Doctors</h1>
+
+[ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html"></a> Medications | <a href="appts_has_scripts.html">Appointment Prescriptions</a>]
+<div id="browse" style="display: block">
+<p><strong>Browse Doctors</strong></p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th><a href="#">New</a></th>
+    <th></th>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Specialty</th>
+  </tr>
+  <tr>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+    <td align="right" >1</td>
+    <td >Kenneth</td>
+    <td align="right">Toniattie</td>
+    <td>Cardiology</td>
+  </tr>
+  <tr>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+    <td align="right" >2</td>
+    <td>Brooke</td>
+    <td align="right">Cattaneo</td>
+    <td >Dermatology</td>
+  </tr>
+  <tr>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+    <td align="right">3</td>
+    <td>Mary</td>
+    <td align="right" >Scheller</td>
+    <td>Pediatrics</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert" style="display: block">
+    <form id="addDoctor">
+        <legend><strong>Add Doctor</strong></legend>
+          <fieldset class="fields">
+            <label> First name </label> <input type="text" name="first_name">
+            <label> Last name </label> <input type="text" name="last_name">
+            <label> Specialty </label> <input type="text" name="specialty">
+          </fieldset>
+          <br>
+          <input class="btn" type="submit" id="addADoctor" value="Add Doctor">
+          <input class="btn" type="button" value="Cancel">
+	</form> <!--add new doctor-->
+</div><!-- insert -->
+
+<p>&nbsp;</p>
+<div id="update" style="display: block">
+  <form id="updateDoctor">
+      <legend><strong>Update Doctor</strong></legend>
+          <fieldset class="fields">
+          <label>ID:</label> 1
+            <label> First name </label> <input type="text" name="first_name" value="Kenneth">
+            <label> Last name </label> <input type="text"  name="last_name" value="Toniattie">
+            <label> Specialty </label> <input type="text" name="specialty" value="Cardiology">
+    </fieldset>
+    <br>
+    <input class="btn" type="submit" id="updateADoctor" value="Save Doctor">
+          <input class="btn" type="button" value="Cancel" >
+  </form> 
+</div><!-- update -->
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form id="deleteDoctor">
+      <legend><strong>Delete Doctor</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <label>ID:</label> 1
+            <label> Name: </label> Kenneth Toniattie
+            
+    </fieldset>
+    <br>
+    <input class="btn" type="submit" id="DeleteDoctor" value="Delete Doctor">
+          <input class="btn" type="button" value="Cancel" >
+  </form> 
+</div><!-- delete -->
+</body>
+</html>

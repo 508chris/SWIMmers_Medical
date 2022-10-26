@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>Appointments</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>Appointments</h1>
+
+[ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html"></a> Medications | <a href="appts_has_scripts.html">Appointment Prescriptions</a>]
+<div id="browse" style="display: block">
+<p><strong>Browse Appointments</strong></p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th><a href="#">New</a></th>
+    <th></th>
+    <th>ID</th>
+    <th>Appointment Reason</th>
+    <th>Date</th>
+    <th>Patient ID</th>
+    <th>Doctor ID</th>
+  </tr>
+  <tr>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+    <td align="right" >1</td>
+    <td >Patient had heart attack</td>
+    <td align="right" >2000-05-20 01:20:00</td>
+    <td>2</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+    <td align="right" >2</td>
+    <td>Patient has acne</td>
+    <td align="right" >2000-05-20 02:45:00</td>
+    <td >3</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+    <td>3</td>
+    <td>Yearly patient check-up</td>
+    <td align="right" >2000-07-25 03:30:00</td>
+    <td>1</td>
+    <td>3</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert" style="display: block">
+    <form id="addPlanet">
+        <legend><strong>Add Planet</strong></legend>
+          <fieldset class="fields">
+            <label> Reason</label> <input type="text" name="reason">
+            <label>  Date</label> <input type="text" name="date">
+            <label> Patient ID</label> <input type="text" name="patient_id">
+            <label> Doctor ID </label> <input type="text" name="doctor_id">
+          </fieldset>
+          <br>
+          <input class="btn" type="submit" id="addAppointment" value="Add New Appointment">
+          <input class="btn" type="button" value="Cancel">
+	</form> <!--add new planet-->
+</div><!-- insert -->
+
+<p>&nbsp;</p>
+<div id="update" style="display: block">
+  <form id="updatePlanet">
+      <legend><strong>Update Appointment</strong></legend>
+          <fieldset class="fields">
+          <label>ID:</label> 1
+            <label> Reason </label> <input type="text" value="Patient had heart attack" name="reason">
+            <label> Date </label> <input type="text"  name="date" value="2000-05-20 02:45:00">
+            <label> Patient ID </label> <input type="text" name="patient_id" value="2">
+            <label> Doctor ID </label> <input type="text" name="doctor_id" value="1">
+    </fieldset>
+    <br>
+    <input class="btn" type="submit" id="saveAppointment" value="Update Appointment">
+          <input class="btn" type="button" value="Cancel" >
+  </form> 
+</div><!-- update -->
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form id="deletePlanet">
+      <legend><strong>Delete Appointment</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <label>ID:</label> 1
+          <br>
+          <label>Date:</label> 2000-05-20 02:45:00
+            
+    </fieldset>
+    <br>
+    <input class="btn" type="submit" id="deleteAppointment" value="Delete Appointment">
+          <input class="btn" type="button" value="Cancel" >
+  </form> 
+</div><!-- delete -->
+</body>
+</html>
