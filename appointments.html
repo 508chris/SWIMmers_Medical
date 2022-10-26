@@ -14,7 +14,7 @@
   <tr>
     <th><a href="#">New</a></th>
     <th></th>
-    <th>ID</th>
+    <th>Appointment ID</th>
     <th>Appointment Reason</th>
     <th>Date</th>
     <th>Patient ID</th>
@@ -55,11 +55,11 @@
         <legend><strong>Add Planet</strong></legend>
           <fieldset class="fields">
             <label> Reason</label> <input type="text" name="reason">
-            <label>  Date</label> <input type="text" name="date">
+            <label> Date</label> <input type="text" name="date">
             <label> Patient ID</label> <input type="text" name="patient_id">
             <label> Doctor ID </label> <input type="text" name="doctor_id">
           </fieldset>
-          <br>
+          <br/>
           <input class="btn" type="submit" id="addAppointment" value="Add New Appointment">
           <input class="btn" type="button" value="Cancel">
 	</form> <!--add new planet-->
@@ -70,29 +70,29 @@
   <form id="updatePlanet">
       <legend><strong>Update Appointment</strong></legend>
           <fieldset class="fields">
-          <label>ID:</label> 1
+          <label>Appointment ID:</label> 1
             <label> Reason </label> <input type="text" value="Patient had heart attack" name="reason">
             <label> Date </label> <input type="text"  name="date" value="2000-05-20 02:45:00">
-            <label> Patient ID </label> <input type="text" name="patient_id" value="2">
-            <label> Doctor ID </label> <input type="text" name="doctor_id" value="1">
+            <label> Patient ID </label> <input type="number" name="patient_id" value="2">
+            <label> Doctor ID </label> <input type="number" name="doctor_id" value="1">
     </fieldset>
-    <br>
+    <br/>
     <input class="btn" type="submit" id="saveAppointment" value="Update Appointment">
           <input class="btn" type="button" value="Cancel" >
   </form> 
 </div><!-- update -->
 <p>&nbsp;</p>
 <div id="delete" style="display: block">
-  <form id="deletePlanet">
+  <form id="deleteAppointment">
       <legend><strong>Delete Appointment</strong></legend>
           <fieldset class="fields">
           <p>Are you sure you wish to delete the following?</p>
-          <label>ID:</label> 1
+          <label><strong>Appointment ID:</strong></label> 1
           <br>
-          <label>Date:</label> 2000-05-20 02:45:00
+          <label><strong>Date:</strong></label> 2000-05-20 02:45:00
             
     </fieldset>
-    <br>
+    <br/>
     <input class="btn" type="submit" id="deleteAppointment" value="Delete Appointment">
           <input class="btn" type="button" value="Cancel" >
   </form> 
