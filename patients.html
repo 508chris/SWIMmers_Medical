@@ -6,9 +6,12 @@
 
 <body>
   <center>
-    [ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html">Medications</a> | <a href="appts_has_scripts.html">Appointment Prescriptions</a>]
 
 <h1>Patients</h1>
+
+[ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html">Medications</a> | <a href="appts_has_scripts.html">Appointment Prescriptions</a> ]
+<p><strong>Browse Patients</strong></p>
+
 <div id="browse" style='display: block'>
   <table border="1" cellpadding="5">
   <tr>
@@ -67,13 +70,19 @@
     <form id="addPatient">
         <legend><strong>Add Patient</strong></legend>
           <fieldset class="fields">
-            <label> First Name </label> <input type="text" name="first_name">
-            <label> Last Name </label> <input type="text" name="last_name">
-            <label> DOB </label> <input type="date" name="dob">
-            <label> Address </label> <input type="text" name="address">
-            <label> Email </label> <input type="text" name="email">
-            <label> Phone Number </label> <input type="tel" name="phone_number">
-            <label> Insurance </label> <input type="text" name="insurance">
+            <label> First Name: </label> <input type="text" name="first_name">
+            <br/>
+            <label> Last Name: </label> <input type="text" name="last_name">
+            <br/>
+            <label> DOB: </label> <input type="date" name="dob">
+            <br/>
+            <label> Address: </label> <input type="text" name="address">
+            <br/>
+            <label> Email: </label> <input type="text" name="email">
+            <br/>
+            <label> Phone Number: </label> <input type="tel" name="phone_number">
+            <br/>
+            <label> Insurance: </label> <input type="text" name="insurance">
           </fieldset>
           <br>
           <input class="btn" type="submit" id="addPatient" value="Add Patient">
@@ -86,13 +95,20 @@
         <legend><strong>Update Patient</strong></legend>
           <fieldset class="fields">
           <label> Patient ID: </label> 1
-            <label> First Name </label> <input type="text" name="first_name" value="Jane">
-            <label> Last Name </label> <input type="text" name="last_name" value="Doe">
-            <label> DOB </label> <input type="date" name="dob" value="1980-11-11">
-            <label> Address </label> <input type="text" name="address" value="55 Amber Ln">
-            <label> Email </label> <input type="text" name="email" value="jdoe@gmail.com">
-            <label> Phone Number </label> <input type="tel" name="phone_number" value="7747755678">
-            <label> Insurance </label> <input type="text" name="insurance" value="Med Monkeys">
+          <br/>
+            <label> First Name: </label> <input type="text" name="first_name" value="Jane">
+            <br/>
+            <label> Last Name: </label> <input type="text" name="last_name" value="Doe">
+            <br/>
+            <label> DOB: </label> <input type="date" name="dob" value="1980-11-11">
+            <br/>
+            <label> Address: </label> <input type="text" name="address" value="55 Amber Ln">
+            <br/>
+            <label> Email: </label> <input type="text" name="email" value="jdoe@gmail.com">
+            <br/>
+            <label> Phone Number: </label> <input type="tel" name="phone_number" value="7747755678">
+            <br/>
+            <label> Insurance: </label> <input type="text" name="insurance" value="Med Monkeys">
       </fieldset>
       <br>
           <input class="btn" type="submit" id="UpdateSavePatient" value="Update Patient">
@@ -108,7 +124,7 @@
           <input type="hidden" name="patientID" id="deletepatientID" value="1">
           <label><strong>Patient ID:</strong></label> 1
           <br>
-            <label> <strong>Full Name</strong></label> Jane Doe
+            <label> <strong>Full Name:</strong></label> Jane Doe
             
     </fieldset>
     <br/>

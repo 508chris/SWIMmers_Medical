@@ -6,9 +6,11 @@
 
 <body>
   <center>
-  [ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html">Medications</a> | <a href="appts_has_scripts.html">Appointment Prescriptions</a>]
 
 <h1>Medications</h1>
+
+[ <a href="patients.html">Patients</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="prescriptions.html">Prescriptions</a> | <a href="medications.html">Medications</a> | <a href="appts_has_scripts.html">Appointment Prescriptions</a> ]
+
 
 <div id="browse" style="display: block">
 <table border="1" cellpadding="5">
@@ -48,9 +50,11 @@
     <form id="addMedication">
         <legend><strong>Add Medication</strong></legend>
           <fieldset class="fields">
-            <label> Medication ID </label> <input type="number" name="medication_id">
-            <label> Medication Name </label> <input type="text" name="medication_name">
-            <label> Medication Type </label> <input type="text" name="medication_type">
+            <label> Medication ID: </label> <input type="number" name="medication_id">
+            <br/>
+            <label> Medication Name: </label> <input type="text" name="medication_name">
+            <br/>
+            <label> Medication Type: </label> <input type="text" name="medication_type">
           </fieldset>
           <br>
           <input class="btn" type="submit" id="addMedication" value="Add Medication">
@@ -63,9 +67,12 @@
   <form id="updateMedication">
       <legend><strong>Update Medication</strong></legend>
           <fieldset class="fields">
-            <label> Medication ID </label> <input type="number" value="1" name="medication_id">
-            <label> Medication Name</label> <input type="text"  name="medication_name" value="Alkaline">
-            <label> Medication Type </label> <input type="text" name="medication_type" value="Opioid">
+            <label> Medication ID: </label> 1
+            <br/>
+            <label> Medication Name:</label> <input type="text"  name="medication_name" value="Alkaline">
+            <br/>
+            <label> Medication Type: </label> <input type="text" name="medication_type" value="Opioid">
+            <br/>
     </fieldset>
     <br>
     <input class="btn" type="submit" id="UpdateSaveMedication" value="Update Medication">
