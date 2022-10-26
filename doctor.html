@@ -14,7 +14,7 @@
   <tr>
     <th><a href="#">New</a></th>
     <th></th>
-    <th>ID</th>
+    <th>Doctor ID</th>
     <th>First Name</th>
     <th>Last Name</th>
     <th>Specialty</th>
@@ -55,7 +55,7 @@
             <label> Last name </label> <input type="text" name="last_name">
             <label> Specialty </label> <input type="text" name="specialty">
           </fieldset>
-          <br>
+          <br/>
           <input class="btn" type="submit" id="addADoctor" value="Add Doctor">
           <input class="btn" type="button" value="Cancel">
 	</form> <!--add new doctor-->
@@ -71,7 +71,7 @@
             <label> Last name </label> <input type="text"  name="last_name" value="Toniattie">
             <label> Specialty </label> <input type="text" name="specialty" value="Cardiology">
     </fieldset>
-    <br>
+    <br/>
     <input class="btn" type="submit" id="updateADoctor" value="Save Doctor">
           <input class="btn" type="button" value="Cancel" >
   </form> 
@@ -82,11 +82,12 @@
       <legend><strong>Delete Doctor</strong></legend>
           <fieldset class="fields">
           <p>Are you sure you wish to delete the following?</p>
-          <label>ID:</label> 1
-            <label> Name: </label> Kenneth Toniattie
+          <label><strong>Doctor ID:</strong></label> 1
+          <br/>
+            <label><strong>Name:</strong></label> Kenneth Toniattie
             
     </fieldset>
-    <br>
+    <br/>
     <input class="btn" type="submit" id="DeleteDoctor" value="Delete Doctor">
           <input class="btn" type="button" value="Cancel" >
   </form> 
