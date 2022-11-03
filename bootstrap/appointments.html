@@ -10,7 +10,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" style="color: #386cec" href="homepage.html">SWIMmers Medical</a>
+        <a class="navbar-brand" style="color: #386cec" href="#">SWIMmers Medical</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -48,16 +48,28 @@
         </div>
         <div class="row">
             <div class="col">View, add, delete, or update SWIMmers Medical appointments.</div>
-            <div class="col text-right d-grid gap-2 d-md-block">
-                <a  class="btn btn-success btn-sm me-md-2" href="add_appt.html" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" style="vertical-align:middle">
-                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                  </svg> Add Appointment</a>
-                <a class="btn btn-danger btn-sm" href="delete_appts.html" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="vertical-align:middle">
-                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                  </svg>  Delete Selected Appointment</a>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col d-grid gap-2 d-md-block">
+            <a  class="btn btn-success me-md-2" href="add_appt.html" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" style="vertical-align:middle">
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+              </svg> Add Appointment</a>
+            <a class="btn btn-danger " href="delete_appts.html" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="vertical-align:middle">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+              </svg>  Delete Selected Appointments</a>
+              
+        </div>
+          <div class="col input-group mb-3">
+            <input type="text" class="form-control" placeholder="Patient's last name" aria-label="Patient's last name" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-primary" role="button" id="button-addon2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="vertical-align:middle">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg></button>
             </div>
+          </div>
         </div>
         <br>
           <div class="row">
@@ -67,12 +79,12 @@
                     <th></th>
                     <th></th>
                     <th scope="col">Appointment ID</th>
+                    <th scope="col">Patient Name</th>
+                    <th scope="col">Doctor Name</th>
                     <th scope="col">Appointment Reason</th>
                     <th scope="col">Appointment Date</th>
                     <th scope="col">Appointment time</th>
-                    <th scope="col">Patient</th>
-                    <th scope="col">Doctor</th>
-                    <th scope="col">Medication Prescribed</th>
+                    <th scope="col">Medication(s) Prescribed</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -81,11 +93,11 @@
                     <td></td>
                     <td><input class="form-check-input move-center" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
                     <th scope="row">1</th>
+                    <td>Matt House</td>
+                    <td>Kenneth Toniattie</td>
                     <td>Patient had a heart attack</td>
                     <td>2000/05/20</td>
                     <td>01:20:00</td>
-                    <td>Matt House</td>
-                    <td>Kenneth Toniattie</td>
                     <td>Valium</td>
                     <td><div>
                       <a href="edit_appt.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -97,11 +109,11 @@
                     <td></td>
                     <td><input class="form-check-input move-center" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
                     <th scope="row">2</th>
+                    <td>Bob Smith</td>
+                    <td>Brooke Cattaneo</td>
                     <td>Patient has acne</td>
                     <td>2000/05/20</td>
                     <td>02:45:00</td>
-                    <td>Bob Smith</td>
-                    <td>Brooke Cattaneo</td>
                     <td>Adderall</td>
                     <td><div>
                       <a href="edit_appt.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -114,11 +126,11 @@
                     <td></td>
                     <td><input class="form-check-input move-center" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
                     <th scope="row">3</th>
+                    <td>Jane Doe</td>
+                    <td>Mary Scheller</td>
                     <td>Yearly patient check-up</td>
                     <td>2000/07/25</td>
                     <td>03:30:00</td>
-                    <td>Jane Doe</td>
-                    <td>Mary Scheller</td>
                     <td>Alkaline</td>
                     <td><div>
                       <a href="edit_appt.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
