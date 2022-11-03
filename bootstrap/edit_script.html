@@ -17,6 +17,9 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+            <li class="navbar-nav mr-auto">
+              <a class="nav-link" href="homepage.html">Home</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="patients.html">Patients</a>
               </li>
@@ -30,7 +33,7 @@
                 <a class="nav-link" href="medications.html">Medications</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" href="prescriptions.html">Prescriptions</a>
+                <a class="nav-link active" href="prescriptions.html">Prescriptions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="appts_has_scripts.html">Appointment Prescriptions</a>
@@ -45,14 +48,18 @@
         <h4>Please update the prescription details below.</h4>
         <br>
         Medication 
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="med_name"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-capsule" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1.828 8.9 8.9 1.827a4 4 0 1 1 5.657 5.657l-7.07 7.071A4 4 0 1 1 1.827 8.9Zm9.128.771 2.893-2.893a3 3 0 1 0-4.243-4.242L6.713 5.429l4.243 4.242Z"/>
-              </svg></span>
-            </div>
-            <input type="text" class="form-control" value="Valium" aria-label="med_name" aria-describedby="basic-addon1">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-capsule" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1.828 8.9 8.9 1.827a4 4 0 1 1 5.657 5.657l-7.07 7.071A4 4 0 1 1 1.827 8.9Zm9.128.771 2.893-2.893a3 3 0 1 0-4.243-4.242L6.713 5.429l4.243 4.242Z"/>
+              </svg></label>
           </div>
+          <select class="custom-select" id="inputGroupSelect01">
+            <option selected>Valium</option>
+            <option value="1">Alkaline</option>
+            <option value="3">Adderall</option>
+          </select>
+        </div>
           Dosage
           <div class="input-group mb-3">
             <div class="input-group-prepend">
