@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,48 +18,48 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="navbar-nav mr-auto">
-              <a class="nav-link" href="homepage.html">Home</a>
-          </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="patients.html">Patients</a>
-              </li>
-            <li class="nav-item">
-                <a class="nav-link" href="doctors.html">Doctors</a>
+              <a class="nav-link active" href="../other_pages/homepage.html">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="appointments.html">Appointments</a>
+                <a class="nav-link" href="../patient_pages/patients.html">Patients</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" href="medications.html">Medications</a>
-              </li>
-            <li class="nav-item">
-                <a class="nav-link" href="prescriptions.html">Prescriptions</a>
+                <a class="nav-link" href="../doctor_pages/doctors.html">Doctors</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="appts_has_scripts.html">Appointment Prescriptions</a>
+                <a class="nav-link" href="../appt_pages/appointments.html">Appointments</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../med_pages/medications.html">Medications</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../script_pages/prescriptions.html">Prescriptions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../other_pages/appts_has_scripts.html">Appointment Prescriptions</a>
               </li>
           </ul>
         </div>
-      </nav>
+    </nav>
       <br>
       <div class="container">
         <div class="row">
-          <div class="col text-left" style="color:black"><h1>Patients</h1></div>
+          <div class="col text-left" style="color:black"><h1>Appointments</h1></div>
         </div>
         <div class="row">
-            <div class="col">View, add, delete, or update SWIMmers Medical patients.</div>
+            <div class="col">View, add, delete, or update SWIMmers Medical appointments.</div>
         </div>
         <br>
         <div class="row">
           <div class="col d-grid gap-2 d-md-block">
-            <a  class="btn btn-success me-md-2" href="add_patient.html" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" style="vertical-align:middle">
+            <a  class="btn btn-success me-md-2" href="add_appt.html" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" style="vertical-align:middle">
                 <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                 <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-              </svg> Add Patient</a>
-            <a class="btn btn-danger " href="delete_patients.html" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="vertical-align:middle">
+              </svg> Add Appointment</a>
+            <a class="btn btn-danger " href="delete_appts.html" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="vertical-align:middle">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-              </svg>  Delete Selected Patients</a>
+              </svg>  Delete Selected Appointments</a>
               
         </div>
           <div class="col input-group mb-3">
@@ -78,15 +78,13 @@
                   <tr class="text-center" style="color:#386cec;">
                     <th></th>
                     <th></th>
-                    <th scope="col">Patient ID</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Birthdate</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone Number</th>
-                    <th scope="col">Insurance</th>
-                    <th scope="col"></th>
+                    <th scope="col">Appointment ID</th>
+                    <th scope="col">Patient Name</th>
+                    <th scope="col">Doctor Name</th>
+                    <th scope="col">Appointment Reason</th>
+                    <th scope="col">Appointment Date</th>
+                    <th scope="col">Appointment Time</th>
+                    <th scope="col">Medication(s) Prescribed</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -95,53 +93,47 @@
                     <td></td>
                     <td><input class="form-check-input move-center" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
                     <th scope="row">1</th>
-                    <td>Jane</td>
-                    <td>Doe</td>
-                    <td>11/11/1980</td>
-                    <td>55 Amber Ln</td>
-                    <td>jdoe@gmail.com</td>
-                    <td>774-775-5678</td>
-                    <td>Med Monkeys</td>
-                    <td></td>
+                    <td>Matt House</td>
+                    <td>Kenneth Toniattie</td>
+                    <td>Patient had a heart attack</td>
+                    <td>2000/05/20</td>
+                    <td>01:20:00</td>
+                    <td>Valium</td>
                     <td><div>
-                        <a href="edit_patient.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                          </svg></a>
+                      <a href="edit_appt.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                      </svg></a>
                       </div></td>
                   </tr>
                   <tr class="text-center">
                     <td></td>
                     <td><input class="form-check-input move-center" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
                     <th scope="row">2</th>
-                    <td>Matt</td>
-                    <td>House</td>
-                    <td>10/10/1970</td>
-                    <td>65 Fern Way</td>
-                    <td>mhouse@gmail.com</td>
-                    <td>800-900-4545</td>
-                    <td>Red Cross Red Shield</td>
-                    <td></td>
+                    <td>Bob Smith</td>
+                    <td>Brooke Cattaneo</td>
+                    <td>Patient has acne</td>
+                    <td>2000/05/20</td>
+                    <td>02:45:00</td>
+                    <td>Adderall</td>
                     <td><div>
-                        <a href="edit_patient.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                          <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                        </svg></a>
+                      <a href="edit_appt.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                      </svg></a>
                       </div></td>
-
+                  <tr class="text-center"></tr>
                   </tr>
                   <tr class="text-center">
                     <td></td>
                     <td><input class="form-check-input move-center" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
                     <th scope="row">3</th>
-                    <td>Bob</td>
-                    <td>Smith</td>
-                    <td>12/25/1980</td>
-                    <td>45 Park St.</td>
-                    <td>bsmith@gmail.com</td>
-                    <td>617-800-1234</td>
-                    <td>United Health</td>
-                    <td></td>
+                    <td>Jane Doe</td>
+                    <td>Mary Scheller</td>
+                    <td>Yearly patient check-up</td>
+                    <td>2000/07/25</td>
+                    <td>03:30:00</td>
+                    <td>Alkaline</td>
                     <td><div>
-                      <a href="edit_patient.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                      <a href="edit_appt.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                       </svg></a>
                       </div></td>
@@ -151,16 +143,14 @@
                     <td></td>
                     <td><input class="form-check-input move-center" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
                     <th scope="row">4</th>
-                    <td>Carly</td>
-                    <td>Sanchez</td>
-                    <td>09/13/1999</td>
-                    <td>400 Beach St.</td>
-                    <td>carlyrox500@yahoo.com</td>
-                    <td>617-422-1905</td>
-                    <td>Red Cross Red Shield</td>
+                    <td>Carly Sanchez</td>
+                    <td>Brooke Cattaneo</td>
+                    <td>Allergic Reaction</td>
+                    <td>2000/07/26</td>
+                    <td>04:35:00</td>
                     <td></td>
                     <td><div>
-                      <a href="edit_patient.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                      <a href="edit_appt.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                       </svg></a>
                       </div></td>
@@ -170,16 +160,14 @@
                     <td></td>
                     <td><input class="form-check-input move-center" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
                     <th scope="row">5</th>
-                    <td>Jared</td>
-                    <td>Attenburg</td>
-                    <td>02/19/1994</td>
-                    <td>356 Cherry St.</td>
-                    <td>attyburger@aol.com</td>
-                    <td>617-813-9860</td>
-                    <td>Med Monkeys</td>
-                    <td></td>
+                    <td>Jared Attenburg</td>
+                    <td>Mary Scheller</td>
+                    <td>Back pain</td>
+                    <td>2000/07/26</td>
+                    <td>04:50:00</td>
+                    <td>Alkaline, Valium</td>
                     <td><div>
-                      <a href="edit_patient.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                      <a href="edit_appt.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                       </svg></a>
                       </div></td>
