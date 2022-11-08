@@ -42,11 +42,15 @@
         </div>
     </nav>
       <br>
-
+      
       <div class="container">
+        {{#each data}}
+        <form id="edit-patient-form" method="POST" action="/edit-patient-form">
         <h1>Update Patient</h1>
         <h4>Please update the patient's details below.</h4>
         <br>
+        <input name="input-patient-id" type="text" value="{{this.patient_id}}" readonly> 
+        <br/>
         Name
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -55,8 +59,8 @@
   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 </svg></span>
             </div>
-            <input type="text" class="form-control" value="Jane">
-            <input type="text" class="form-control" value="Doe">
+            <input name='input-first-name' type="text" class="form-control" value="{{this.first_name}}">
+            <input name='input-last-name' type="text" class="form-control" value="{{this.last_name}}">
           </div>
           Date of Birth
           <div class="input-group mb-3">
@@ -66,7 +70,7 @@
                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
               </svg></span>
             </div>
-            <input type="date" class="form-control" value="1980-11-11" aria-label="DOB" aria-describedby="basic-addon1">
+            <input name='input-dob' type="date" class="form-control" value="{{this.dob}}" aria-label="DOB" aria-describedby="basic-addon1">
           </div>
           Address
           <div class="input-group mb-3">
@@ -75,7 +79,7 @@
                 <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
               </svg></span>
             </div>
-            <input type="text" class="form-control" value="55 Amber Ln" aria-label="Address" aria-describedby="basic-addon1">
+            <input name='input-address' type="text" class="form-control" value="{{this.address}}" aria-label="Address" aria-describedby="basic-addon1">
           </div>
           Email
           <div class="input-group mb-3">
@@ -84,7 +88,7 @@
                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
               </svg></span>
             </div>
-            <input type="text" class="form-control" value="jdoe@gmail.com" aria-label="email" aria-describedby="basic-addon1">
+            <input name='input-email' type="text" class="form-control" value="{{this.email}}" aria-label="email" aria-describedby="basic-addon1">
           </div>
           Phone Number
           <div class="input-group mb-3">
@@ -93,7 +97,7 @@
                 <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
               </svg></span>
             </div>
-            <input type="text" class="form-control" value="774-775-5678" aria-label="phone_number" aria-describedby="basic-addon1">
+            <input name='input-phone-number' type="text" class="form-control" value="{{this.phone_number}}" aria-label="phone_number" aria-describedby="basic-addon1">
           </div>
           Insurance
           <div class="input-group mb-3">
@@ -102,15 +106,15 @@
                 <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8.5 4.5v.634l.549-.317a.5.5 0 1 1 .5.866L9 6l.549.317a.5.5 0 1 1-.5.866L8.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L7 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5a.5.5 0 1 1 1 0zM5.5 9h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm0 2h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
               </svg></span>
             </div>
-            <input type="text" class="form-control" value="Med Monkeys" aria-label="insurance" aria-describedby="basic-addon1">
+            <input name='input-insurance' type="text" class="form-control" value="{{this.insurance}}" aria-label="insurance" aria-describedby="basic-addon1">
           </div>
           <br>
           <div class="row">
             <div class="col text-right d-grid gap-2 d-md-block">
-                <button class="btn btn-primary me-md-2" type="button"> Update Patient</button>
+                <button class="btn btn-primary me-md-2" type="submit"> Update Patient</button>
                 <button class="btn btn-secondary" type="button"> Return</button>
-          
-
+        </form>
+        {{/each}} 
         </div><!-- /.container -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
