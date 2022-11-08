@@ -35,16 +35,100 @@ app.get('/', function(req, res)
 */
 app.get('/patients', function(req, res)
    {
-        let query1 = "SELECT * FROM Patients;";
+        let query1;
 
-        db.pool.query(query1, function(error, rows, fields){
-            res.render('./patient_pages/patients', {data:rows});
-        })
-   });
+        // If there is no query string, we just perform a basic SELECT
+        if (req.query.last_name === undefined)
+        {
+            query1 = "SELECT * FROM Patients;";
+        }
+    
+        // If there is a query string, we assume this is a search, and return desired results
+        else
+        {
+            query1 = `SELECT * FROM Patients WHERE last_name LIKE "${req.query.last_name}%"`
+        }
+
+        let query2 = "SELECT * FROM Patients;";               // Define our query
+
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+            let patients = rows;
+            db.pool.query(query2, (error, rows, fields) => {
+                let row = rows;
+                return res.render('./patient_pages/patients', {data: patients, row: row})
+            })
+            // res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        })                                                      // an object where 'data' is equal to the 'rows' we
+    });                                                         // received back from the query
 
 app.get('/add_patient', function(req, res){
     res.render('./patient_pages/add_patient')
 })
+
+
+app.get('/delete_patients', function(req, res){
+    res.render('./patient_pages/delete_patients')
+})
+
+app.get('/edit_patient', function(req, res){
+
+    let query3 = `SELECT * FROM Patients WHERE patient_id LIKE "${req.query.patient_id}%";`
+    
+    db.pool.query(query3, function(error, rows, fields){
+        let patients = rows;
+        console.log( {data: patients} )
+    })
+     res.render('./patient_pages/edit_patient')
+})
+
+
+app.put('/put-person-ajax/', function(req, res, next){
+    let data = req.body
+    let patientID = parseInt(data.patient_id)
+    let query1 = `SELECT * FROM Patients WHERE patient_id = patientID;`
+    db.pool.query(query1, [patientID] , function(error, rows, fields){
+        if (error){
+            console.log(error)
+            res.sendStatus(400)
+        }else{
+            console.log({data: rows})
+            res.redirect('/')
+        }
+    })
+})
+
+
+app.get('/edit_patient', function(req, res){
+        console.log('made it')
+        let query3 = `SELECT * FROM Patients WHERE patient_id LIKE "${req.query.patient_id}%";`
+        
+        db.pool.query(query3, function(error, rows, fields){
+            let patients = rows;
+            console.log( {data: patients} )
+        })
+
+
+
+        // let query1;
+        // if (req.query.last_name === undefined){
+        //     query1 = "SELECT * FROM Patients;";
+        // } else{
+        //     query1 = `SELECT * FROM Patients WHERE last_name LIKE "${req.query.last_name}%"`
+        // }
+
+        // let query2 = "SELECT * FROM Patients;";           
+
+        // db.pool.query(query1, function(error, rows, fields){  
+        //     let patients = rows;
+        //     db.pool.query(query2, (error, rows, fields) => {
+        //         let row = rows;
+        //         return res.render('./patient_pages/patients', {data: patients, row: row})
+        //     })
+        //     // res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        // })                                                      // an object where 'data' is equal to the 'rows' we
+    });  
+
+
 
 
 app.post('/add-patient-form', function(req, res){
