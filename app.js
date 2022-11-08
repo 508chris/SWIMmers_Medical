@@ -77,6 +77,16 @@ app.post('/add-doctor-form', function(req, res){
         })
     })
 
+app.get('/delete_doctors', function(req, res)
+    {
+         res.render('./doctor_pages/delete_doctors')
+    });
+
+
+
+
+
+
 app.get('/appointments', function(req, res)
    {
         res.render('./appt_pages/appointments')
