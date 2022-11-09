@@ -113,6 +113,23 @@ app.post('/add-patient-form', function(req, res){
 })
 
 
+app.delete('/delete-patient-ajax/', function(req,res,next){
+    let data = req.body;
+    let patientID = parseInt(data.patient_id);
+    let deletePatient = `DELETE FROM Patients WHERE patient_id = ?`;
+    
+    db.pool.query(deletePatient, [patientID], function(error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else{
+            res.sendStatus(204);
+        }
+    })
+  });
+
+
 
 
 
