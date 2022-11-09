@@ -117,8 +117,7 @@ app.get('/delete_doctor', function(req, res){
 app.delete('/delete-doctor-ajax/', function(req,res,next){
     let data = req.body;
     let doctorID = parseInt(data.id);
-    let deleteDoctor = `DELETE FROM Doctors WHERE doctor_id = ? `;
-    let deleteAppointment = `DELETE FROM Appointments WHERE doctor_id = ?`;
+    let deleteAppointment = `DELETE FROM Appointments WHERE doctor_id =?`;
 
   
           // Run the 1st query
