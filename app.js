@@ -75,17 +75,66 @@ app.post('/add-doctor-form', function(req, res){
                 res.redirect('/doctors');
             }
         })
-    })
-
-app.get('/delete_doctors', function(req, res)
-    {
-         res.render('./doctor_pages/delete_doctors')
     });
 
+app.get('/edit_doctor', function(req, res){
 
+        let query1 = `SELECT * FROM Doctors WHERE doctor_id LIKE "${req.query.edit_doctor_id}%";`
+        
+        db.pool.query(query1, function(error, rows, fields){
+            let doctors = rows;
+            console.log( {data: doctors})
+            return res.render('./doctor_pages/edit_doctor', {data: doctors})
+        })
+    });
+    
+app.post('/edit-doctor-form', function(req, res){
+    let data = req.body;
 
+    query1 = `UPDATE Doctors SET first_name = '${data['input-doctor-first-name']}', last_name = '${data['input-doctor-last-name']}', specialty = '${data['input-specialty']}' WHERE doctor_id = '${data['input-doctor-id']}';`
+    db.pool.query(query1, function(error, rows, fields){
+        
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        }else{
+            res.redirect('/doctors')
+        }
+    })
+});
+    
+app.get('/delete_doctor', function(req, res){
 
+    let query1 = `SELECT * FROM Doctors WHERE doctor_id LIKE "${req.query.delete_doctor_id}%";`
+    
+    db.pool.query(query1, function(error, rows, fields){
+        let doctors = rows;
+        console.log( {data: doctors})
+        return res.render('./doctor_pages/delete_doctor', {data: doctors})
+    })
+});
 
+app.delete('/delete-doctor-ajax/', function(req,res,next){
+    let data = req.body;
+    let doctorID = parseInt(data.id);
+    let deleteDoctor = `DELETE FROM Doctors WHERE doctor_id = ? `;
+    let deleteAppointment = `DELETE FROM Appointments WHERE doctor_id = ?`;
+
+  
+          // Run the 1st query
+          db.pool.query(deleteAppointment, [doctorID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.redirect('/doctors')
+              }
+  })});
 
 app.get('/appointments', function(req, res)
    {

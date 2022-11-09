@@ -44,6 +44,7 @@
       <br>
 
       <div class="container">
+      {{#each data}}
         <div class="row">
             <div class="col" style="color:black"><h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16" style="color:red">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -63,10 +64,10 @@
                 </thead>
                 <tbody>
                   <tr class="text-center" style="color:red;">
-                    <th scope="row">1</th>
-                    <td>Kenneth</td>
-                    <td>Toniattie</td>
-                    <td>Cardiology</td>
+                    <th scope="row" name="input-doctor-id">{{this.doctor_id}}</th>
+                    <td>{{this.first_name}}</td>
+                    <td>{{this.last_name}}</td>
+                    <td>{{this.specialty}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -74,11 +75,12 @@
         <br>
         <div class="row">
             <div class="col text-right d-grid gap-2 d-md-block">
-                <button class="btn btn-danger me-md-2" type="button">Permanently Delete</button>
+                <button value="{{this.doctor_id}}" onclick="deleteDoctor({{this.doctor_id}})" class="btn btn-danger me-md-2" type="submit">Permanently Delete</button>
                 <button class="btn btn-secondary" type="button"> Return</button>
-
+        {{/each}}
         </div>
     <!-- Optional JavaScript -->
+    <script src="./js/delete.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
