@@ -57,7 +57,7 @@ app.get('/patients', function(req, res)
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
             let patients = rows;
            
-            return res.render('./patient_pages/patients', {data: patients, row: row})
+            return res.render('./patient_pages/patients', {data: patients})
             })
             // res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
         });                                                      // an object where 'data' is equal to the 'rows' w                                                      // received back from the query
@@ -308,6 +308,9 @@ app.post('/edit-med-form', function(req, res){
     })
 })
 
+app.get('/delete_med', function(req, res){
+    let query1 = `SELECT * FROM Doctors WHERE doctor_id LIKE "${req.query.delete_med_id}%";`
+})
 
 
 app.get('/appointments', function(req, res)
