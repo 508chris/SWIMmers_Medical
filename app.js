@@ -5,7 +5,7 @@
 // Express
 var express = require('express');
 var app = express();
-PORT = 9001;
+PORT = 9130;
 
 // Database
 var db = require('./database/db-connector');
@@ -54,17 +54,13 @@ app.get('/patients', function(req, res)
             query1 = `SELECT * FROM Patients WHERE last_name LIKE "${req.query.last_name}%"`
         }
 
-        let query2 = "SELECT * FROM Patients;";               // Define our query
-
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
             let patients = rows;
-            db.pool.query(query2, (error, rows, fields) => {
-                let row = rows;
-                return res.render('./patient_pages/patients', {data: patients, row: row})
+           
+            return res.render('./patient_pages/patients', {data: patients})
             })
             // res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                         // received back from the query
+        });                                                      // an object where 'data' is equal to the 'rows' w                                                      // received back from the query
 
 app.get('/add_patient', function(req, res){
     res.render('./patient_pages/add_patient')
@@ -81,7 +77,6 @@ app.get('/edit_patient', function(req, res){
     
     db.pool.query(query3, function(error, rows, fields){
         let patients = rows;
-        console.log( {data: patients} )
         return res.render('./patient_pages/edit_patient', {data: patients})
     })
     
@@ -156,13 +151,26 @@ app.delete('/delete-patient-ajax/', function(req,res,next){
 // ------------------------------------
 
 app.get('/doctors', function(req, res)
-    {
-        let query1 = "SELECT * FROM Doctors;";
+{
+    let query1;
 
-        db.pool.query(query1, function(error, rows, fields){
-            res.render('./doctor_pages/doctors', {data:rows});
-        })
-    });
+    if (req.query.lname === undefined)
+    {
+        query1 ="SELECT * FROM Doctors;";
+    }
+
+    else
+    {
+        query1 = `SELECT * FROM Doctors WHERE last_name LIKE "${req.query.lname}%"`
+    }
+    
+    db.pool.query(query1, function(error ,rows, fields){
+
+        let doctors = rows;
+
+        return res.render('./doctor_pages/doctors', {data: doctors})
+    })
+  });
 
 
 app.get('/add_doctor', function(req, res)
@@ -173,7 +181,6 @@ app.get('/add_doctor', function(req, res)
 app.post('/add-doctor-form', function(req, res){
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
-        console.log(data)
         
         // Create the query and run it on the database
         query1 = `INSERT INTO Doctors (first_name, last_name, specialty) VALUES ('${data['input-doctor-first-name']}', '${data['input-doctor-last-name']}', '${data['input-specialty']}')`;
@@ -198,7 +205,7 @@ app.post('/add-doctor-form', function(req, res){
 
 app.get('/edit_doctor', function(req, res){
 
-        let query1 = `SELECT * FROM Doctors WHERE doctor_id LIKE "${req.query.edit_doctor_id}%";`
+        let query1 = `SELECT * FROM Doctors WHERE doctor_id = "${req.query.edit_doctor_id}%";`
         
         db.pool.query(query1, function(error, rows, fields){
             let doctors = rows;
@@ -274,7 +281,6 @@ app.get('/add_med', function(req, res)
 
 app.post('/add-med-form', function(req, res){
     let data = req.body;
-    console.log(data)
 
     query1 = `INSERT INTO Medications (medication_name, medication_type) VALUES ('${data['input-med-name']}', '${data['input-med-type']}')`;
     db.pool.query(query1, function(error, rows, fields){
@@ -295,12 +301,28 @@ app.get('/edit_med', function(req, res){
 
     db.pool.query(query1, function(error, rows, fields) {
         let meds = rows;
-        console.log({data:doctors})
-        return res.render('./med_pages/edit_med', {data:meds})
+        console.log({data:meds})
+        return res.render('./med_pages/edit_med', {data: meds})
     })
 });
 
+app.post('/edit-med-form', function(req, res){
+    let data = req.body;
 
+    query1 = `UPDATE Medications SET medication_name = '${data['input-med-name']}', medication_type = '${data['input-med-type']}' WHERE medication_id = '${data['input-med-id']}';`
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        } else {
+            res.redirect('/medications')
+        }
+    })
+})
+
+app.get('/delete_med', function(req, res){
+    let query1 = `SELECT * FROM Doctors WHERE doctor_id LIKE "${req.query.delete_med_id}%";`
+})
 
 
 app.get('/appointments', function(req, res)

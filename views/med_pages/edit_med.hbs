@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="./css/style.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,25 +18,33 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="navbar-nav mr-auto">
+<<<<<<< HEAD:views/med_pages/edit_med.html
               <a class="nav-link" href="../other_pages/homepage.html">Home</a>
+=======
+              <a class="nav-link" href="/">Home</a>
+>>>>>>> 2c7da288e83794fbf59b75275c588ed1731c9646:views/med_pages/edit_med.hbs
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../patient_pages/patients.html">Patients</a>
+                <a class="nav-link" href="/patients">Patients</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" href="../doctor_pages/doctors.html">Doctors</a>
+                <a class="nav-link" href="/doctors">Doctors</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../appt_pages/appointments.html">Appointments</a>
+                <a class="nav-link" href="/appointments">Appointments</a>
               </li>
             <li class="nav-item">
+<<<<<<< HEAD:views/med_pages/edit_med.html
                 <a class="nav-link active" href="../med_pages/medications.html">Medications</a>
+=======
+                <a class="nav-link active" href="/medications">Medications</a>
+>>>>>>> 2c7da288e83794fbf59b75275c588ed1731c9646:views/med_pages/edit_med.hbs
               </li>
             <li class="nav-item">
-                <a class="nav-link" href="../script_pages/prescriptions.html">Prescriptions</a>
+                <a class="nav-link" href="/prescriptions">Prescriptions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../other_pages/appts_has_scripts.html">Appointment Prescriptions</a>
+                <a class="nav-link" href="/appt_scripts">Appointment Prescriptions</a>
               </li>
           </ul>
         </div>
@@ -44,17 +52,26 @@
       <br>
 
       <div class="container">
+        {{#each data}}
+        <form id="edit-med-form" method="POST" action="/edit-med-form">
         <h1>Update Medication</h1>
         <h4>Please update the medication details below.</h4>
         <br>
+          <div class="input-group mb-3">
+        <div class="input-group-prepend col-xs-2">
+          <span class="input-group-text" id="specialty">ID</span>
+            </div>
+            <input name='input-med-id' type="text" class="form-control" value="{{this.medication_id}}" readonly>
+        </div>
+
         Medication Name
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="med_nme"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-capsule" viewBox="0 0 16 16">
+              <span class="input-group-text" id="med_name"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-capsule" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.828 8.9 8.9 1.827a4 4 0 1 1 5.657 5.657l-7.07 7.071A4 4 0 1 1 1.827 8.9Zm9.128.771 2.893-2.893a3 3 0 1 0-4.243-4.242L6.713 5.429l4.243 4.242Z"/>
               </svg></span>
             </div>
-            <input type="text" class="form-control" value="Adderall" aria-label="med_name" aria-describedby="basic-addon1">
+            <input name='input-med-name' type="text" class="form-control" value="{{this.medication_name}}">
           </div>
           Medication Type
           <div class="input-group mb-3">
@@ -64,15 +81,15 @@
                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
               </svg></span>
             </div>
-            <input type="text" class="form-control" value="Stimulant" aria-label="med" aria-describedby="basic-addon1">
+            <input name='input-med-type' type="text" class="form-control" value="{{this.medication_type}}">
           </div>
           <br>
           <div class="row">
             <div class="col text-right d-grid gap-2 d-md-block">
-                <button class="btn btn-primary me-md-2" type="button"> Update Medication</button>
-                <button class="btn btn-secondary" type="button"> Return</button>
-          
-
+                <button class="btn btn-primary me-md-2" type="submit"> Update Medication</button>
+                <a class="btn btn-danger" href="/medications" type="button"> Return</a>
+          </form>
+          {{/each}}
         </div><!-- /.container -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
