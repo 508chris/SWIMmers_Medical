@@ -48,8 +48,14 @@
         <form id="edit-doctor-form" method="POST" action="/edit-doctor-form">
         <h1>Update Doctor</h1>
         <h4>Please update the doctor's details below.</h4>
-        <br> 
-        <input name="input-doctor-id" type="text" value="{{this.doctor_id}}" readonly> 
+        <br>
+        
+        <div class="input-group mb-3">
+        <div class="input-group-prepend col-xs-2">
+          <span class="input-group-text" id="specialty">ID</span>
+            </div>
+            <input name='input-doctor-id' type="text" class="form-control" value="{{this.doctor_id}}" readonly>
+        </div>
 
         Name
         <div class="input-group mb-3">
