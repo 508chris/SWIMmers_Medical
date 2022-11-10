@@ -83,8 +83,8 @@
         <br>
         <div class="row">
             <div class="col text-right d-grid gap-2 d-md-block">
-            <a  class="btn btn-danger me-md-2" onclick="deletePatient({{this.patient_id}})" role="button">Permanently Delete</a>
-              <button class="btn btn-secondary" type="button"> Return</button>
+            <a  class="btn btn-danger me-md-2" onclick="deletePatient({{this.patient_id}})" href='/patients' role="button">Permanently Delete</a>
+              <button class="btn btn-secondary" onclick='location.href="/patients"' type="button"> Return</button>
         {{/each}}
         </div>
     <!-- Optional JavaScript -->

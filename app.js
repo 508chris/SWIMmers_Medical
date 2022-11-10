@@ -142,10 +142,6 @@ app.delete('/delete-patient-ajax/', function(req,res,next){
             console.log(error);
             res.sendStatus(400);
         }
-        else{
-            console.log('madeit')
-            res.redirect('/patients')
-        }
     })
   });
 
