@@ -1,11 +1,9 @@
-
-
 function deletePatient(patientID) {
     let link = '/delete-patient-ajax/';
     let data = {
       patient_id: patientID
     };
-  
+
     $.ajax({
       url: link,
       type: 'DELETE',
@@ -16,8 +14,8 @@ function deletePatient(patientID) {
       }
     });
   }
-  
-  function deleteRow(patientID){
+
+  function deleteRow(personID){
       let table = document.getElementById("patient-table");
       for (let i = 0, row; row = table.rows[i]; i++) {
          if (table.rows[i].getAttribute("data-value") == patientID) {

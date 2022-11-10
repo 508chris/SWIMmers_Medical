@@ -71,9 +71,9 @@ app.get('/add_patient', function(req, res){
 })
 
 
-app.get('/delete_patients', function(req, res){
-    res.render('./patient_pages/delete_patients')
-})
+// app.get('/delete_patients', function(req, res){
+//     res.render('./patient_pages/delete_patients')
+// })
 
 app.get('/edit_patient', function(req, res){
 
@@ -118,10 +118,24 @@ app.post('/add-patient-form', function(req, res){
 })
 
 
+
+
+  app.get('/delete_patient', function(req, res){
+
+    let query1 = `SELECT * FROM Patients WHERE patient_id = "${req.query.delete_patient_id}%";`
+    
+    db.pool.query(query1, function(error, rows, fields){
+        let patients = rows;
+        console.log( {data: patients})
+        return res.render('./patient_pages/delete_patients', {data: patients})
+    })
+});
+
+
 app.delete('/delete-patient-ajax/', function(req,res,next){
     let data = req.body;
     let patientID = parseInt(data.patient_id);
-    let deletePatient = `DELETE FROM Patients WHERE patient_id = ?`;
+    let deletePatient = `DELETE FROM Patients WHERE patient_id = ?;`;
     
     db.pool.query(deletePatient, [patientID], function(error, rows, fields){
         if (error){
@@ -129,10 +143,12 @@ app.delete('/delete-patient-ajax/', function(req,res,next){
             res.sendStatus(400);
         }
         else{
-            res.sendStatus(204);
+            console.log('madeit')
+            res.redirect('/patients')
         }
     })
   });
+
 
 
 
@@ -212,7 +228,7 @@ app.post('/edit-doctor-form', function(req, res){
     
 app.get('/delete_doctor', function(req, res){
 
-    let query1 = `SELECT * FROM Doctors WHERE doctor_id LIKE "${req.query.delete_doctor_id}%";`
+    let query1 = `SELECT * FROM Doctors WHERE doctor_id = "${req.query.delete_doctor_id}%";`
     
     db.pool.query(query1, function(error, rows, fields){
         let doctors = rows;
