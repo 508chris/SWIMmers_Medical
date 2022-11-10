@@ -22,10 +22,19 @@ app.use(express.urlencoded({extended: true}))
 /*
     ROUTES
 */
+
+// ------------------------------------
+// HOMEPAGE ROUTE
+// ------------------------------------
+
 app.get('/', function(req, res)
     {
         res.render('homepage');
     });
+
+// ------------------------------------
+// PATIENTS PAGE ROUTES
+// ------------------------------------
 
 app.get('/patients', function(req, res)
    {
@@ -35,6 +44,10 @@ app.get('/patients', function(req, res)
             res.render('./patient_pages/patients', {data:rows});
         })
    });
+
+// ------------------------------------
+// DOCTORS PAGE ROUTES
+// ------------------------------------
 
 app.get('/doctors', function(req, res)
     {
@@ -135,15 +148,61 @@ app.delete('/delete-doctor-ajax/', function(req,res,next){
               }
   })});
 
+// ------------------------------------
+// MEDICATIONS PAGE ROUTES
+// ------------------------------------
+
+app.get('/medications', function(req, res)
+   {
+        let query1 = "SELECT * FROM Medications;";
+        
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('./med_pages/medications', {data:rows});
+        })
+    });
+
+app.get('/add_med', function(req, res)
+    {
+        res.render('./med_pages/add_med')
+    });
+
+app.post('/add-med-form', function(req, res){
+    let data = req.body;
+    console.log(data)
+
+    query1 = `INSERT INTO Medications (medication_name, medication_type) VALUES ('${data['input-med-name']}', '${data['input-med-type']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.redirect('/medications');
+        }
+});
+});
+
+app.get('/edit_med', function(req, res){
+    let query1 = `SELECT * FROM Medications WHERE medication_id LIKE "${req.query.edit_med_id}%";`
+
+    db.pool.query(query1, function(error, rows, fields) {
+        let meds = rows;
+        console.log({data:doctors})
+        return res.render('./med_pages/edit_med', {data:meds})
+    })
+});
+
+
+
+
 app.get('/appointments', function(req, res)
    {
         res.render('./appt_pages/appointments')
    });
 
-app.get('/medications', function(req, res)
-   {
-        res.render('./med_pages/medications')
-   });
+
 
 app.get('/prescriptions', function(req, res)
    {
