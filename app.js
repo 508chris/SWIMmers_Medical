@@ -77,7 +77,6 @@ app.get('/edit_patient', function(req, res){
     
     db.pool.query(query3, function(error, rows, fields){
         let patients = rows;
-        console.log( {data: patients} )
         return res.render('./patient_pages/edit_patient', {data: patients})
     })
     
@@ -170,7 +169,6 @@ app.get('/add_doctor', function(req, res)
 app.post('/add-doctor-form', function(req, res){
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
-        console.log(data)
         
         // Create the query and run it on the database
         query1 = `INSERT INTO Doctors (first_name, last_name, specialty) VALUES ('${data['input-doctor-first-name']}', '${data['input-doctor-last-name']}', '${data['input-specialty']}')`;
@@ -271,7 +269,6 @@ app.get('/add_med', function(req, res)
 
 app.post('/add-med-form', function(req, res){
     let data = req.body;
-    console.log(data)
 
     query1 = `INSERT INTO Medications (medication_name, medication_type) VALUES ('${data['input-med-name']}', '${data['input-med-type']}')`;
     db.pool.query(query1, function(error, rows, fields){
@@ -292,11 +289,24 @@ app.get('/edit_med', function(req, res){
 
     db.pool.query(query1, function(error, rows, fields) {
         let meds = rows;
-        console.log({data:doctors})
-        return res.render('./med_pages/edit_med', {data:meds})
+        console.log({data:meds})
+        return res.render('./med_pages/edit_med', {data: meds})
     })
 });
 
+app.post('/edit-med-form', function(req, res){
+    let data = req.body;
+
+    query1 = `UPDATE Medications SET medication_name = '${data['input-med-name']}', medication_type = '${data['input-med-type']}' WHERE medication_id = '${data['input-med-id']}';`
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        } else {
+            res.redirect('/medications')
+        }
+    })
+})
 
 
 
