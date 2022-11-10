@@ -193,7 +193,7 @@ app.post('/add-doctor-form', function(req, res){
 
 app.get('/edit_doctor', function(req, res){
 
-        let query1 = `SELECT * FROM Doctors WHERE doctor_id LIKE "${req.query.edit_doctor_id}%";`
+        let query1 = `SELECT * FROM Doctors WHERE doctor_id = "${req.query.edit_doctor_id}%";`
         
         db.pool.query(query1, function(error, rows, fields){
             let doctors = rows;
@@ -219,7 +219,7 @@ app.post('/edit-doctor-form', function(req, res){
     
 app.get('/delete_doctor', function(req, res){
 
-    let query1 = `SELECT * FROM Doctors WHERE doctor_id LIKE "${req.query.delete_doctor_id}%";`
+    let query1 = `SELECT * FROM Doctors WHERE doctor_id = "${req.query.delete_doctor_id}%";`
     
     db.pool.query(query1, function(error, rows, fields){
         let doctors = rows;
