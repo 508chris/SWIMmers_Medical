@@ -5,7 +5,7 @@
 // Express
 var express = require('express');
 var app = express();
-PORT = 9001;
+PORT = 9130;
 
 // Database
 var db = require('./database/db-connector');
@@ -54,17 +54,13 @@ app.get('/patients', function(req, res)
             query1 = `SELECT * FROM Patients WHERE last_name LIKE "${req.query.last_name}%"`
         }
 
-        let query2 = "SELECT * FROM Patients;";               // Define our query
-
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
             let patients = rows;
-            db.pool.query(query2, (error, rows, fields) => {
-                let row = rows;
-                return res.render('./patient_pages/patients', {data: patients, row: row})
+           
+            return res.render('./patient_pages/patients', {data: patients, row: row})
             })
             // res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                         // received back from the query
+        });                                                      // an object where 'data' is equal to the 'rows' w                                                      // received back from the query
 
 app.get('/add_patient', function(req, res){
     res.render('./patient_pages/add_patient')
@@ -144,13 +140,26 @@ app.delete('/delete-patient-ajax/', function(req,res,next){
 // ------------------------------------
 
 app.get('/doctors', function(req, res)
-    {
-        let query1 = "SELECT * FROM Doctors;";
+{
+    let query1;
 
-        db.pool.query(query1, function(error, rows, fields){
-            res.render('./doctor_pages/doctors', {data:rows});
-        })
-    });
+    if (req.query.lname === undefined)
+    {
+        query1 ="SELECT * FROM Doctors;";
+    }
+
+    else
+    {
+        query1 = `SELECT * FROM Doctors WHERE last_name LIKE "${req.query.lname}%"`
+    }
+    
+    db.pool.query(query1, function(error ,rows, fields){
+
+        let doctors = rows;
+
+        return res.render('./doctor_pages/doctors', {data: doctors})
+    })
+  });
 
 
 app.get('/add_doctor', function(req, res)
