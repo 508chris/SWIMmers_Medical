@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="./css/style.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,25 +18,25 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="navbar-nav mr-auto">
-              <a class="nav-link" href="../other_pages/homepage.html">Home</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../patient_pages/patients.html">Patients</a>
+                <a class="nav-link" href="/patients">Patients</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" href="../doctor_pages/doctors.html">Doctors</a>
+                <a class="nav-link" href="/doctors">Doctors</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../appt_pages/appointments.html">Appointments</a>
+                <a class="nav-link" href="/appointments">Appointments</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" href="../med_pages/medications.html">Medications</a>
+                <a class="nav-link" href="/medications">Medications</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link active" href="../script_pages/prescriptions.html">Prescriptions</a>
+                <a class="nav-link active" href="/prescriptions">Prescriptions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../other_pages/appts_has_scripts.html">Appointment Prescriptions</a>
+                <a class="nav-link" href="/appts_has_scripts">Appointment Prescriptions</a>
               </li>
           </ul>
         </div>
@@ -44,9 +44,21 @@
       <br>
 
       <div class="container">
+        
+        <form id="edit-script-form", method="POST", action="edit-script-form">
         <h1>Update Prescription</h1>
         <h4>Please update the prescription details below.</h4>
         <br>
+
+        <div class="input-group mb-3">
+        <div class="input-group-prepend col-xs-2">
+          <span class="input-group-text" id="specialty">ID</span>
+            </div>
+            {{#each data}}
+            <input name='input-script-id' type="text" class="form-control" value="{{this.script_id}}" readonly>
+            {{/each}}
+        </div>
+
         Medication 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -54,11 +66,12 @@
               <path fill-rule="evenodd" d="M1.828 8.9 8.9 1.827a4 4 0 1 1 5.657 5.657l-7.07 7.071A4 4 0 1 1 1.827 8.9Zm9.128.771 2.893-2.893a3 3 0 1 0-4.243-4.242L6.713 5.429l4.243 4.242Z"/>
               </svg></label>
           </div>
-          <select class="custom-select" id="inputGroupSelect01">
-            <option selected>Choose...</option>
-            <option value="1">Alkaline</option>
-            <option value="2">Valium</option>
-            <option value="3">Adderall</option>
+          <select name='input-med-id' class="custom-select" id="inputGroupSelect01">
+            <option value='' selected>Choose..</option>
+            {{#each medications}}
+            <option value="{{this.medication_id}}">{{this.medication_name}}</option>
+            {{/each}}
+
           </select>
         </div>
           Dosage
@@ -69,7 +82,8 @@
                 <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
               </svg></span>
             </div>
-            <input type="text" class="form-control" value="e.g. 30mg" aria-label="dosage" aria-describedby="basic-addon1">
+            {{#each data}}
+            <input name="input-dosage" type="text" class="form-control" value="{{this.dosage}}" aria-label="dosage" aria-describedby="basic-addon1">
           </div>
            Instructions
         <div class="input-group mb-3">
@@ -79,16 +93,17 @@
               <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
             </svg></span>
           </div>
-          <input type="text" class="form-control" placeholder="e.g. Take twice a day" aria-label="DOB" aria-describedby="basic-addon1">
+          <input name="input-instructions" type="text" class="form-control" value="{{this.instructions}}" aria-label="DOB" aria-describedby="basic-addon1">
         </div>
           <br>
           <div class="row">
             <div class="col text-right d-grid gap-2 d-md-block">
-                <button class="btn btn-primary me-md-2" type="button"> Update Prescription</button>
-                <button class="btn btn-secondary" type="button"> Return</button>
-          
-
-        </div><!-- /.container -->
+                <button class="btn btn-primary me-md-2" type="submit"> Update Prescription</button>
+                <button class="btn btn-secondary" type="button" onclick="location.href='/prescriptions'"> Return</button>
+        {{/each}}
+        </form>
+        </div>
+        <!-- /.container -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

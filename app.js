@@ -312,7 +312,7 @@ app.post('/add-med-form', function(req, res){
 });
 
 app.get('/edit_med', function(req, res){
-    let query1 = `SELECT * FROM Medications WHERE medication_id LIKE "${req.query.edit_med_id}%";`
+    let query1 = `SELECT * FROM Medications WHERE medication_id = "${req.query.edit_med_id}%";`
 
     db.pool.query(query1, function(error, rows, fields) {
         let meds = rows;
@@ -479,6 +479,43 @@ app.delete('/delete-prescription-ajax/', function(req,res,next){
                 res.redirect('/prescriptions')
               }
   })});
+
+
+
+
+app.get('/edit_script', function(req, res){
+    let query2 = `SELECT * FROM Medications;`
+    let query1 = `SELECT Medications.medication_id, Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE script_id = "${req.query.edit_script_id}%";`;
+    
+    db.pool.query(query1, function(error, rows, fields) {
+        let curr_med = rows;
+        db.pool.query(query2, function(error, rows, fields){
+            let medications = rows
+            return res.render('./script_pages/edit_script', {data: curr_med, medications})
+        })
+    })
+});
+
+app.post('/edit-script-form', function(req, res){
+    let data = req.body;
+
+    query1 = `UPDATE Prescriptions SET medication_id = '${data['input-med-id']}', dosage = '${data['input-dosage']}', instructions = '${data['input-instructions']}' WHERE script_id = '${data['input-script-id']}';`
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        } else {
+            res.redirect('/prescriptions')
+        }
+    })
+})
+
+
+
+
+
+
+
 
 
 
