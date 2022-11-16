@@ -266,13 +266,28 @@ app.delete('/delete-doctor-ajax/', function(req,res,next){
 // ------------------------------------
 
 app.get('/medications', function(req, res)
-   {
-        let query1 = "SELECT * FROM Medications;";
-        
-        db.pool.query(query1, function(error, rows, fields){
-            res.render('./med_pages/medications', {data:rows});
-        })
-    });
+{
+    let query1;
+
+    if (req.query.medication_name === undefined)
+    {
+        query1 ="SELECT * FROM Medications;";
+    }
+
+    else
+    {
+        query1 = `SELECT * FROM Medications WHERE medication_name LIKE "${req.query.medication_name}%";`
+    }
+    
+    db.pool.query(query1, function(error ,rows, fields){
+
+        let medications = rows;
+
+        return res.render('./med_pages/medications', {data: medications})
+    })
+  });
+
+
 
 app.get('/add_med', function(req, res)
     {
@@ -320,10 +335,46 @@ app.post('/edit-med-form', function(req, res){
     })
 })
 
-app.get('/delete_med', function(req, res){
-    let query1 = `SELECT * FROM Doctors WHERE doctor_id LIKE "${req.query.delete_med_id}%";`
-})
 
+app.get('/delete_med', function(req, res){
+
+    let query1 = `SELECT * FROM Medications WHERE medication_id = "${req.query.delete_medication_id}%";`
+    
+    db.pool.query(query1, function(error, rows, fields){
+        let medications = rows;
+        console.log( {data: medications})
+        return res.render('./med_pages/delete_med', {data: medications})
+    })
+});
+
+
+
+app.delete('/delete-medication-ajax/', function(req,res,next){
+    let data = req.body;
+    let medicationID = parseInt(data.medication_id);
+    let deleteMedication = `DELETE FROM Medications WHERE medication_id = ?;`;
+  
+          // Run the 1st query
+          db.pool.query(deleteMedication, [medicationID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.redirect('/medications')
+              }
+  })});
+
+
+
+
+// ------------------------------------
+// Appointments PAGE ROUTES
+// ------------------------------------
 
 app.get('/appointments', function(req, res)
    {
@@ -332,10 +383,105 @@ app.get('/appointments', function(req, res)
 
 
 
+
+// ------------------------------------
+// Prescriptions PAGE ROUTES
+// ------------------------------------
+
+   
 app.get('/prescriptions', function(req, res)
-   {
-        res.render('./script_pages/prescriptions')
-   });
+{
+    let query1;
+
+    if (req.query.prescription_name === undefined)
+    {
+        query1 ="SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id;";
+    }
+
+    else
+    {
+        query1 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE medication_name LIKE "${req.query.prescription_name}%";`
+    }
+    
+    db.pool.query(query1, function(error ,rows, fields){
+
+        let prescriptions = rows;
+
+        return res.render('./script_pages/prescriptions', {data: prescriptions})
+    })
+
+  });
+
+
+app.get('/add_script', function(req, res){
+    let query1 = `SELECT * FROM Prescriptions;`
+    let query2 = `SELECT * FROM Medications;`
+
+    db.pool.query(query1, function(error, rows, fields){
+        let prescriptions = rows;
+        db.pool.query(query2, function(error, rows, fields){
+            let medications = rows;
+            return res.render('./script_pages/add_script', {data: prescriptions, medications})
+        })
+        
+    })
+})
+
+
+
+app.post('/add-script-form', function(req, res){
+    let data = req.body;
+    query1 = `INSERT INTO Prescriptions (medication_id, dosage, instructions) VALUES ('${data['input-prescription-name']}', '${data['input-dosage']}', '${data['input-instructions']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400)
+        } else{
+            res.redirect('/prescriptions')
+        }
+    })
+
+})
+
+
+
+app.get('/delete_scripts', function(req, res){
+
+    let query1 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE script_id = "${req.query.delete_script_id}%";`;
+    
+    db.pool.query(query1, function(error, rows, fields){
+        let script = rows;
+        return res.render('./script_pages/delete_scripts', {data: script})
+    })
+});
+
+
+
+app.delete('/delete-prescription-ajax/', function(req,res,next){
+    let data = req.body;
+    let scriptID = parseInt(data.script_id);
+    let deletePrescription = `DELETE FROM Prescriptions WHERE script_id = ?;`;
+          // Run the 1st query
+          db.pool.query(deletePrescription, [scriptID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.redirect('/prescriptions')
+              }
+  })});
+
+
+
+
+// ------------------------------------
+// Appt_scripts PAGE ROUTES
+// ------------------------------------
 
 app.get('/appt_scripts', function(req, res)
    {

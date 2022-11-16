@@ -30,10 +30,10 @@
                 <a class="nav-link" href="/appointments">Appointments</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link active" href="/medications">Medications</a>
+                <a class="nav-link" href="/medications">Medications</a>
               </li>
             <li class="nav-item">
-                <a class="nav-link" href="/prescriptions">Prescriptions</a>
+                <a class="nav-link active" href="/prescriptions">Prescriptions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/appts_has_scripts">Appointment Prescriptions</a>
@@ -44,28 +44,30 @@
       <br>
 
       <div class="container">
+        {{#each data}}
         <div class="row">
             <div class="col" style="color:black"><h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16" style="color:red">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                 <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
-              </svg> Are you sure you wish to delete the following medication(s)?</h3></div>
+              </svg> Are you sure you wish to delete the following prescription(s)?</h3></div>
         </div>
         <br>
           <div class="row">
-            {{#each data}}
             <table class="table table-striped">
                 <thead>
                   <tr class="text-center" style="color:black;">
-                    <th scope="col">Medication ID</th>
+                    <th scope="col">Prescription ID</th>
                     <th scope="col">Medication Name</th>
-                    <th scope="col">Medication Type</th>
+                    <th scope="col">Dosage</th>
+                    <th scope="col">Instructions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="text-center" style="color:red;">
-                    <th scope="row" name="input-medication-id">{{this.medication_id}}</th>
+                    <th scope="row" name="input-prescription-id">{{this.script_id}}</th>
                     <td>{{this.medication_name}}</td>
-                    <td>{{this.medication_type}}</td>
+                    <td>{{this.dosage}}</td>
+                    <td>{{this.instructions}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -73,12 +75,12 @@
         <br>
         <div class="row">
             <div class="col text-right d-grid gap-2 d-md-block">
-            <a  class="btn btn-danger me-md-2" onclick="deleteMedication({{this.medication_id}})" href='/medications' role="button">Permanently Delete</a>
-              <button class="btn btn-secondary" onclick='location.href="/medications"' type="button"> Return</button>
+            <a  class="btn btn-danger me-md-2" onclick="deletePrescription({{this.script_id}})" href='/prescriptions' role="button">Permanently Delete</a>
+              <button class="btn btn-secondary" onclick='location.href="/prescriptions"' type="button"> Return</button>
         {{/each}}
         </div>
     <!-- Optional JavaScript -->
-    <script src="./js/delete_medication.js"></script>
+    <script src="./js/delete_prescription.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     {{!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
