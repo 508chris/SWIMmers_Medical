@@ -378,7 +378,11 @@ app.delete('/delete-medication-ajax/', function(req,res,next){
 
 app.get('/appointments', function(req, res)
    {
-        res.render('./appt_pages/appointments')
+        let query1 = "SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Medications.medication_name,  Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Prescriptions.script_id, Appointments.script_id, Appointments.appt_id, Appointments.reason_for_appt, Appointments.date, Appointments.time FROM Appointments JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id JOIN Patients ON Appointments.patient_id = Patients.patient_id JOIN Prescriptions on Appointments.script_id = Prescriptions.script_id JOIN Medications on Prescriptions.medication_id = Medications.medication_id" ;
+
+        db.pool.query(query1, function(error, rows, fields) {
+            res.render('./appt_pages/appointments', {data:rows});
+        })
    });
 
 
