@@ -372,9 +372,9 @@ app.get('/appointments', function (req, res) {
 
 
 app.get('/add_appt', function (req, res) {
-    let query1 = `SELECT * FROM Doctors;`
-    let query2 = `SELECT * FROM Patients;`
-    let query3 = `SELECT * FROM Prescriptions;`
+    let query1 = `SELECT * FROM Doctors ORDER BY Doctors.first_name ASC;`
+    let query2 = `SELECT * FROM Patients ORDER BY Patients.first_name ASC;`
+    let query3 = `SELECT Prescriptions.script_id, Medications.medication_name, Prescriptions.dosage FROM Prescriptions JOIN Medications ON Prescriptions.medication_id = Medications.medication_id ORDER BY Medications.medication_name ASC;`
 
     db.pool.query(query1, function(error, rows, fields){
         let doctors = rows;
@@ -382,8 +382,8 @@ app.get('/add_appt', function (req, res) {
             let patients = rows;
             db.pool.query(query3, function(error, rows, fields){
                 let prescriptions = rows;
-                console.log(doctors, patients, prescriptions)
-                return res.render('./appt_pages/add_appt', {data: doctors, patients, prescriptions})
+                console.log({doctors, patients, prescriptions})
+                return res.render('./appt_pages/add_appt', {doctors, patients, prescriptions})
             })
         })
     })

@@ -55,7 +55,7 @@
               <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg></label>
           </div>
-          <select class="custom-select" id="inputGroupSelect01">
+          <select name="input-patient-select" class="custom-select" id="inputGroupSelect01">
             <option selected>Choose...</option>
             {{#each patients}}
             <option value="{{this.patient_id}}">{{this.first_name}} {{this.last_name}}</option>
@@ -70,7 +70,7 @@
               <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg></label>
           </div>
-          <select class="custom-select" id="inputGroupSelect01">
+          <select name="input-doctor-select" class="custom-select" id="inputGroupSelect01">
             <option selected>Choose...</option>
             {{#each doctors}}
             <option value="{{this.doctor_id}}">{{this.first_name}} {{this.last_name}}</option>
@@ -86,7 +86,7 @@
                 <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
               </svg></span>
             </div>
-            <input type="text" class="form-control" placeholder="e.g. Check up" aria-label="DOB" aria-describedby="basic-addon1">
+            <input name="input-appt-reason" type="text" class="form-control" placeholder="e.g. Check up" aria-label="DOB" aria-describedby="basic-addon1">
           </div>
           Appointment Date
           <div class="input-group mb-3">
@@ -96,7 +96,7 @@
                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
               </svg></span>
             </div>
-            <input type="date" class="form-control" placeholder="Date" aria-label="DOB" aria-describedby="basic-addon1">
+            <input name="input-appt-date" type="date" class="form-control" placeholder="Date" aria-label="DOB" aria-describedby="basic-addon1">
           </div>
           Appointment Time
           <div class="input-group mb-3">
@@ -106,14 +106,14 @@
                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
               </svg></span>
             </div>
-            <input type="time" class="form-control" placeholder="Time" aria-label="DOB" aria-describedby="basic-addon1">
+            <input name="input-appt-time" type="time" class="form-control" placeholder="Time" aria-label="DOB" aria-describedby="basic-addon1">
           </div>
           Prescription ID
           {{#each prescriptions}}
           <div class="form-check mt-2 mb-1">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input name="input-script-id" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
-            {{this.script_id}}
+            {{this.script_id}} - {{this.medication_name}} - {{this.dosage}}
             </label>
           </div>
           {{/each}}
