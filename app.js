@@ -363,12 +363,13 @@ app.delete('/delete-medication-ajax/', function (req, res, next) {
 // ------------------------------------
 
 app.get('/appointments', function (req, res) {
-    let query1 = "SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Medications.medication_name,  Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Prescriptions.script_id, Appointments.script_id, Appointments.appt_id, Appointments.reason_for_appt, Appointments.date, Appointments.time FROM Appointments JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id JOIN Patients ON Appointments.patient_id = Patients.patient_id JOIN Prescriptions on Appointments.script_id = Prescriptions.script_id JOIN Medications on Prescriptions.medication_id = Medications.medication_id";
 
+    let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Medications.medication_name, Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.script_id, Appointments.appt_id, Appointments.reason_for_appt, Appointments.date, Appointments.time FROM Appointments CROSS JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id CROSS JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Prescriptions on Appointments.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications on Prescriptions.medication_id = Medications.medication_id;`
     db.pool.query(query1, function (error, rows, fields) {
-        res.render('./appt_pages/appointments', { data: rows });
+        res.render('./appt_pages/appointments', {rows});
     })
 });
+
 
 
 app.get('/add_appt', function (req, res) {
@@ -406,7 +407,7 @@ app.post('/add-appt-form', function(req, res){
             }
         })
     } else{
-        query1 = `INSERT INTO Appointments (patient_id, doctor_id, reason_for_appt, date, time, script_id) VALUES ('${data['input-patient-select']}', '${data['input-doctor-select']}', '${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}', NULL);`
+        query1 = `INSERT INTO Appointments (patient_id, doctor_id, reason_for_appt, date, time) VALUES ('${data['input-patient-select']}', '${data['input-doctor-select']}', '${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}');`
         db.pool.query(query1, function(error, rows, fields){
             if (error) {
                 console.log(error);
