@@ -390,7 +390,19 @@ app.get('/add_appt', function (req, res) {
     
 });
 
+app.post('/add-appt-form', function(req, res){
+    let data = req.body
+    query1 = `INSERT INTO Appointments (reason_for_appt, date, time, patient_id, doctor_id, script_id) VALUES ('${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}', '${data['input-patient-select']}','${data['input-doctor-select']}'), '${data['input-script-id']}'`;
+    db.pool.query(query1, function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400)
+        } else {
+            res.redirect('/appointments')
+        }
+    })
 
+});
 // ------------------------------------
 // Prescriptions PAGE ROUTES
 // ------------------------------------
@@ -435,6 +447,7 @@ app.get('/add_script', function (req, res) {
 
 app.post('/add-script-form', function (req, res) {
     let data = req.body;
+    console.log(data)
     query1 = `INSERT INTO Prescriptions (medication_id, dosage, instructions) VALUES ('${data['input-prescription-name']}', '${data['input-dosage']}', '${data['input-instructions']}')`;
     db.pool.query(query1, function (error, rows, fields) {
         if (error) {
