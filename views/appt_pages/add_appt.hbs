@@ -44,6 +44,7 @@
       <br>
 
       <div class="container">
+        <form id="add-appt-form" method="POST" action="/add-appt-form">
         <h1>Add Appointment</h1>
         <h4>Please enter the appointment details below.</h4>
         <br>
@@ -111,7 +112,7 @@
           Prescription ID
           {{#each prescriptions}}
           <div class="form-check mt-2 mb-1">
-            <input name="input-script-id" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input value='{{this.script_id}}' name="input-script-id" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
             {{this.script_id}} - {{this.medication_name}} - {{this.dosage}}
             </label>
@@ -121,10 +122,10 @@
           <br>
           <div class="row">
             <div class="col text-right d-grid gap-2 d-md-block">
-                <button class="btn btn-success me-md-2" type="button"> Submit Appointment</button>
-                <button class="btn btn-secondary" type="button"> Return</button>
+                <button class="btn btn-success me-md-2" type="submit"> Submit Appointment</button>
+                <button class="btn btn-secondary" type="button" onclick="location.href='/appointments'"> Return</button>
           
-
+        </form>
         </div><!-- /.container -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

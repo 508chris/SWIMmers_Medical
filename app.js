@@ -382,13 +382,45 @@ app.get('/add_appt', function (req, res) {
             let patients = rows;
             db.pool.query(query3, function(error, rows, fields){
                 let prescriptions = rows;
-                console.log({doctors, patients, prescriptions})
                 return res.render('./appt_pages/add_appt', {doctors, patients, prescriptions})
             })
         })
     })
     
 });
+
+
+
+app.post('/add-appt-form', function(req, res){
+    let data = req.body
+    console.log(data)
+    let key = 'insert-script-id'
+    if (key in data){
+        query1 = `INSERT INTO Appointments (patient_id, doctor_id, reason_for_appt, date, time, script_id) VALUES ('${data['input-patient-select']}', '${data['input-doctor-select']}', '${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}', '${data['input-script-id']}');`
+        db.pool.query(query1, function(error, rows, fields){
+            if (error) {
+                console.log(error);
+                res.sendStatus(400)
+            } else {
+                res.redirect('/appointments')
+            }
+        })
+    } else{
+        query1 = `INSERT INTO Appointments (patient_id, doctor_id, reason_for_appt, date, time, script_id) VALUES ('${data['input-patient-select']}', '${data['input-doctor-select']}', '${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}', NULL);`
+        db.pool.query(query1, function(error, rows, fields){
+            if (error) {
+                console.log(error);
+                res.sendStatus(400)
+            } else {
+                res.redirect('/appointments')
+            }
+        }) 
+    }
+})
+
+
+
+
 
 
 // ------------------------------------
