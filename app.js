@@ -378,7 +378,14 @@ app.delete('/delete-medication-ajax/', function(req,res,next){
 
 app.get('/appointments', function(req, res)
    {
-        res.render('./appt_pages/appointments')
+
+        let query1 = `SELECT CONCAT(Patients.first_name, ' ', Patients.last_name) as patient_name, CONCAT(Doctors.first_name, ' ', Doctors.last_name) AS doctor_name, Appointments.appt_id, Appointments.reason_for_appt, Appointments.date, Appointments.time, Medications.medication_name FROM Appointments JOIN Patients on Appointments.patient_id = Patients.patient_id JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id JOIN Prescriptions ON Appointments.script_id = Prescriptions.script_id JOIN Medications on Prescriptions.medication_id = Medications.medication_id;`
+
+        db.pool.query(query1, function(error, rows, fields){
+            console.log({data: rows})
+            return res.render('./appt_pages/appointments', {data: rows})
+        })
+        
    });
 
 
@@ -397,6 +404,7 @@ app.get('/prescriptions', function(req, res)
     {
         query1 ="SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id;";
     }
+
 
     else
     {
@@ -530,3 +538,5 @@ app.get('/appt_scripts', function(req, res)
 app.listen(PORT, function(){
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
+
+
