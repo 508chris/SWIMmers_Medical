@@ -420,6 +420,10 @@ app.post('/add-appt-form', function(req, res){
 })
 
 
+
+
+
+
 // ------------------------------------
 // Prescriptions PAGE ROUTES
 // ------------------------------------
@@ -432,7 +436,8 @@ app.get('/prescriptions', function (req, res) {
         query1 = "SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id;";
     }
 
-    else {
+    else
+    {
         query1 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE medication_name LIKE "${req.query.prescription_name}%";`
     }
 
@@ -563,3 +568,5 @@ app.get('/appt_scripts', function (req, res) {
 app.listen(PORT, function () {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
+
+
