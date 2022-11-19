@@ -85,7 +85,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                {{#each rows}}
+                {{#each appt}}
                   <tr class="text-center">
                     <td></td>
                     <th scope="row">{{this.appt_id}}</th>
@@ -94,7 +94,7 @@
                     <td>{{this.reason_for_appt}}</td>
                     <td>{{this.date}}</td>
                     <td>{{this.time}}</td>
-                    <td>{{this.medication_name}}</td>
+                    <td>{{this.list}}</td>
                     <td>
                       <div>
                       <a href="edit_appt.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">

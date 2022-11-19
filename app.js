@@ -5,7 +5,7 @@
 // Express
 var express = require('express');
 var app = express();
-PORT = 9131;
+PORT = 9130;
 
 // Database
 var db = require('./database/db-connector');
@@ -364,13 +364,14 @@ app.delete('/delete-medication-ajax/', function (req, res, next) {
 
 app.get('/appointments', function (req, res) {
 
-    let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Medications.medication_name, Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.script_id, Appointments.appt_id, Appointments.reason_for_appt, Appointments.date, Appointments.time FROM Appointments CROSS JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id CROSS JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Prescriptions on Appointments.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications on Prescriptions.medication_id = Medications.medication_id;`
-    db.pool.query(query1, function (error, rows, fields) {
-        res.render('./appt_pages/appointments', {rows});
-    })
-});
+    let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.appt_id, Appointments.reason_for_appt, DATE_FORMAT(Appointments.date, "%m-%d-%Y") AS date, DATE_FORMAT(Appointments.time, "%l:%i %p") AS time, Medications.medication_name, group_concat(Medications.medication_name separator ', ') AS 'list' FROM Appointments LEFT OUTER JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id LEFT OUTER JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Appts_has_Scripts on Appointments.appt_id = Appts_has_Scripts.appt_id LEFT OUTER JOIN Prescriptions ON Appts_has_Scripts.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications ON Prescriptions.medication_id = Medications.medication_id GROUP BY appt_id;`
 
-
+    db.pool.query(query1, function(error, rows, fields){
+        let appt = rows;
+        console.log(appt)
+        return res.render('./appt_pages/appointments', { appt })
+        })
+    });
 
 app.get('/add_appt', function (req, res) {
     let query1 = `SELECT * FROM Doctors ORDER BY Doctors.first_name ASC;`
@@ -394,30 +395,25 @@ app.get('/add_appt', function (req, res) {
 
 app.post('/add-appt-form', function(req, res){
     let data = req.body
-    console.log(data)
-    let key = 'insert-script-id'
-    if (key in data){
-        query1 = `INSERT INTO Appointments (patient_id, doctor_id, reason_for_appt, date, time, script_id) VALUES ('${data['input-patient-select']}', '${data['input-doctor-select']}', '${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}', '${data['input-script-id']}');`
-        db.pool.query(query1, function(error, rows, fields){
-            if (error) {
-                console.log(error);
-                res.sendStatus(400)
-            } else {
-                res.redirect('/appointments')
-            }
+    let script_ids = data['input-script-id'];
+    // insert into appointments
+    query1 = `INSERT INTO Appointments (patient_id, doctor_id, reason_for_appt, date, time) VALUES ('${data['input-patient-select']}', '${data['input-doctor-select']}', '${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}');`
+    // insert into intersection table
+    db.pool.query(query1, function(error, rows, fields){
+        apt = rows;
+        for (let script_id of script_ids){
+            query2 = `INSERT INTO Appts_has_Scripts (appt_id, script_id) VALUES ((SELECT MAX(appt_id) from Appointments), '${parseInt(script_id)}');`
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400)
+                
+                }
+            })
+        }
+        res.redirect('/appointments')
         })
-    } else{
-        query1 = `INSERT INTO Appointments (patient_id, doctor_id, reason_for_appt, date, time) VALUES ('${data['input-patient-select']}', '${data['input-doctor-select']}', '${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}');`
-        db.pool.query(query1, function(error, rows, fields){
-            if (error) {
-                console.log(error);
-                res.sendStatus(400)
-            } else {
-                res.redirect('/appointments')
-            }
-        }) 
-    }
-})
+    })
 
 
 
@@ -469,7 +465,6 @@ app.get('/add_script', function (req, res) {
 
 app.post('/add-script-form', function (req, res) {
     let data = req.body;
-    console.log(data)
     query1 = `INSERT INTO Prescriptions (medication_id, dosage, instructions) VALUES ('${data['input-prescription-name']}', '${data['input-dosage']}', '${data['input-instructions']}')`;
     db.pool.query(query1, function (error, rows, fields) {
         if (error) {
@@ -568,5 +563,3 @@ app.get('/appt_scripts', function (req, res) {
 app.listen(PORT, function () {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
-
-
