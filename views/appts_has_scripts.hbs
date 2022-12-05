@@ -43,15 +43,16 @@
     </nav>
       <br>
       <div class="container">
+        
         <div class="row">
           <div class="col text-left" style="color:black"><h1>Appointment Prescriptions</h1></div>
         </div>
         <br>
           <div class="row">
+            
             <table class="table table-striped">
                 <thead>
                   <tr class="text-center" style="color:#386cec;">
-                    <th scope="col">ID</th>
                     <th scope="col">Appointment ID</th>
                     <th scope="col">Prescription ID</th>
                     <th scope="col">Patient Name</th>
@@ -59,50 +60,20 @@
                     <th scope="col">Medication Name</th>
                   </tr>
                 </thead>
+                {{#each row}}
                 <tbody>
                   <tr class="text-center">
-                    <th scope="row">1</th>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>Matt House</td>
-                    <td>Kenneth Toniattie</td>
-                    <td>Valium</td>
+                    <th scope="row">{{this.appt_id}}</th>
+                    <td>{{this.script_id}}</td>
+                    <td>{{this.patient_first}} {{this.patient_last}}</td>
+                    <td>{{this.doctor_first}} {{this.doctor_last}}</td>
+                    <td>{{this.medication_name}}</td>
                   </tr>
-                  <tr class="text-center">
-                    <th scope="row">2</th>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>Bob Smith</td>
-                    <td>Brooke Cattaneo</td>
-                    <td>Adderall</td>
                   
-                  </tr>
-                  <tr class="text-center">
-                    <th scope="row">3</th>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>Jane Doe</td>
-                    <td>Mary Scheller</td>
-                    <td>Alkaline</td>
-                  </tr>
-                  <tr class="text-center">
-                    <th scope="row">4</th>
-                    <td>5</td>
-                    <td>1</td>
-                    <td>Jared Attenburg</td>
-                    <td>Mary Scheller</td>
-                    <td>Valium</td>
-                  </tr>
-                  <tr class="text-center">
-                    <th scope="row">5</th>
-                    <td>5</td>
-                    <td>3</td>
-                    <td>Jared Attenburg</td>
-                    <td>Mary Scheller</td>
-                    <td>Alkaline</td>
-                  </tr>
                 </tbody>
+                {{/each}}
               </table>
+              
         </div>
 
         </div>

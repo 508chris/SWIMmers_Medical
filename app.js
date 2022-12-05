@@ -414,6 +414,36 @@ app.post('/add-appt-form', function (req, res) {
     })
 })
 
+app.get('/delete_appts', function (req, res) {
+
+    let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Medications.medication_name, Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.script_id, Appointments.appt_id, Appointments.reason_for_appt, Appointments.date, Appointments.time FROM Appointments CROSS JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id CROSS JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Prescriptions on Appointments.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications on Prescriptions.medication_id = Medications.medication_id WHERE appt_id = "${req.query.delete_appt_id}%";`
+    db.pool.query(query1, function (error, rows, fields) {
+        res.render('./appt_pages/delete_appts', { rows });
+    })
+});
+
+
+app.delete('/delete-appt-ajax/', function (req, res, next) {
+    let data = req.body;
+    let apptID = parseInt(data.appt_id);
+    let deleteAppt_Script = `DELETE FROM Appts_has_Scripts WHERE appt_id = ?;`
+    let deleteAppt = `DELETE FROM Appointments WHERE appt_id = ?;`;
+    db.pool.query(deleteAppt_Script, [apptID], function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        }
+    })
+    db.pool.query(deleteAppt, [apptID], function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        }
+    })
+});
+
+
+
 
 app.get('/edit_appt', function (req, res) {
     let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.appt_id, Appointments.reason_for_appt, DATE_FORMAT(Appointments.date, "%Y-%m-%d") AS date, DATE_FORMAT(Appointments.time, "%h:%i:%s") AS time, Medications.medication_name, group_concat(Medications.medication_name separator ', ') AS 'list', Prescriptions.script_id, group_concat(Prescriptions.script_id separator ', ') AS 'script_list', group_concat(Prescriptions.dosage separator ', ') AS 'dosage_list' FROM Appointments LEFT OUTER JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id LEFT OUTER JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Appts_has_Scripts on Appointments.appt_id = Appts_has_Scripts.appt_id LEFT OUTER JOIN Prescriptions ON Appts_has_Scripts.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications ON Prescriptions.medication_id = Medications.medication_id WHERE Appointments.appt_id = "${req.query.edit_appt_id}%";`
@@ -574,8 +604,15 @@ app.post('/edit-script-form', function (req, res) {
 // ------------------------------------
 
 app.get('/appt_scripts', function (req, res) {
-    res.render('appts_has_scripts')
+    let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Medications.medication_name, Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.script_id, Appointments.appt_id, Appointments.reason_for_appt, Appointments.date, Appointments.time FROM Appointments CROSS JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id CROSS JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Prescriptions on Appointments.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications on Prescriptions.medication_id = Medications.medication_id;`
+    db.pool.query(query1, function (error, rows, fields) {
+        let row = rows;
+        res.render('appts_has_scripts', { row })
+    })
 });
+
+
+
 /*
     LISTENER
 */
