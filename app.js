@@ -5,7 +5,7 @@
 // Express
 var express = require('express');
 var app = express();
-PORT = 9130;
+PORT = 9131;
 
 // Database
 var db = require('./database/db-connector');
@@ -366,56 +366,76 @@ app.get('/appointments', function (req, res) {
 
     let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.appt_id, Appointments.reason_for_appt, DATE_FORMAT(Appointments.date, "%m-%d-%Y") AS date, DATE_FORMAT(Appointments.time, "%l:%i %p") AS time, Medications.medication_name, group_concat(Medications.medication_name separator ', ') AS 'list' FROM Appointments LEFT OUTER JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id LEFT OUTER JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Appts_has_Scripts on Appointments.appt_id = Appts_has_Scripts.appt_id LEFT OUTER JOIN Prescriptions ON Appts_has_Scripts.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications ON Prescriptions.medication_id = Medications.medication_id GROUP BY appt_id;`
 
-    db.pool.query(query1, function(error, rows, fields){
+    db.pool.query(query1, function (error, rows, fields) {
         let appt = rows;
-        console.log(appt)
         return res.render('./appt_pages/appointments', { appt })
-        })
-    });
+    })
+});
 
 app.get('/add_appt', function (req, res) {
     let query1 = `SELECT * FROM Doctors ORDER BY Doctors.first_name ASC;`
     let query2 = `SELECT * FROM Patients ORDER BY Patients.first_name ASC;`
     let query3 = `SELECT Prescriptions.script_id, Medications.medication_name, Prescriptions.dosage FROM Prescriptions JOIN Medications ON Prescriptions.medication_id = Medications.medication_id ORDER BY Medications.medication_name ASC;`
 
-    db.pool.query(query1, function(error, rows, fields){
+    db.pool.query(query1, function (error, rows, fields) {
         let doctors = rows;
-        db.pool.query(query2, function(error, rows, fields){
+        db.pool.query(query2, function (error, rows, fields) {
             let patients = rows;
-            db.pool.query(query3, function(error, rows, fields){
+            db.pool.query(query3, function (error, rows, fields) {
                 let prescriptions = rows;
-                return res.render('./appt_pages/add_appt', {doctors, patients, prescriptions})
+                return res.render('./appt_pages/add_appt', { doctors, patients, prescriptions })
             })
         })
     })
-    
+
 });
 
 
 
-app.post('/add-appt-form', function(req, res){
+app.post('/add-appt-form', function (req, res) {
     let data = req.body
     let script_ids = data['input-script-id'];
     // insert into appointments
     query1 = `INSERT INTO Appointments (patient_id, doctor_id, reason_for_appt, date, time) VALUES ('${data['input-patient-select']}', '${data['input-doctor-select']}', '${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}');`
     // insert into intersection table
-    db.pool.query(query1, function(error, rows, fields){
+    db.pool.query(query1, function (error, rows, fields) {
         apt = rows;
-        for (let script_id of script_ids){
+        for (let script_id of script_ids) {
             query2 = `INSERT INTO Appts_has_Scripts (appt_id, script_id) VALUES ((SELECT MAX(appt_id) from Appointments), '${parseInt(script_id)}');`
-            db.pool.query(query2, function(error, rows, fields){
+            db.pool.query(query2, function (error, rows, fields) {
                 if (error) {
                     console.log(error);
                     res.sendStatus(400)
-                
+
                 }
             })
         }
         res.redirect('/appointments')
+    })
+})
+
+
+app.get('/edit_appt', function (req, res) {
+    let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.appt_id, Appointments.reason_for_appt, DATE_FORMAT(Appointments.date, "%Y-%m-%d") AS date, DATE_FORMAT(Appointments.time, "%h:%i:%s") AS time, Medications.medication_name, group_concat(Medications.medication_name separator ', ') AS 'list', Prescriptions.script_id, group_concat(Prescriptions.script_id separator ', ') AS 'script_list', group_concat(Prescriptions.dosage separator ', ') AS 'dosage_list' FROM Appointments LEFT OUTER JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id LEFT OUTER JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Appts_has_Scripts on Appointments.appt_id = Appts_has_Scripts.appt_id LEFT OUTER JOIN Prescriptions ON Appts_has_Scripts.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications ON Prescriptions.medication_id = Medications.medication_id WHERE Appointments.appt_id = "${req.query.edit_appt_id}%";`
+    let query2 = `SELECT Patients.patient_id, Patients.first_name AS patient_first, Patients.last_name AS patient_last FROM Patients;`
+    let query3 = `SELECT Doctors.doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last FROM Doctors;`
+    let query4 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id;`
+
+    db.pool.query(query1, function (error, rows, fields) {
+        let curr_appt = rows;
+        console.log(curr_appt)
+        db.pool.query(query2, function (error, rows, fields) {
+            let patients = rows
+            db.pool.query(query3, function (error, rows, fields) {
+                let doctors = rows
+                db.pool.query(query4, function (error, rows, fields) {
+                    let scripts = rows
+                    return res.render('./appt_pages/edit_appt', { data: curr_appt, patients, doctors, scripts })
+                })
+            })
         })
     })
-
-
+});
 
 
 
@@ -432,8 +452,7 @@ app.get('/prescriptions', function (req, res) {
         query1 = "SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id;";
     }
 
-    else
-    {
+    else {
         query1 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE medication_name LIKE "${req.query.prescription_name}%";`
     }
 
