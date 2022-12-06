@@ -214,7 +214,7 @@ app.get('/edit_doctor', function (req, res) {
 app.post('/edit-doctor-form', function (req, res) {
     let data = req.body;
 
-    query1 = `UPDATE Doctors SET first_name = '${data['input - doctor - first - name']}', last_name = '${data['input - doctor - last - name']}', specialty = '${data['input - specialty']}' WHERE doctor_id = '${data['input - doctor - id']}'; `
+    query1 = `UPDATE Doctors SET first_name = '${data['input-doctor-first-name']}', last_name = '${data['input-doctor-last-name']}', specialty = '${data['input-specialty']}' WHERE doctor_id = '${data['input-doctor-id']}'; `
     db.pool.query(query1, function (error, rows, fields) {
 
         if (error) {
@@ -290,7 +290,7 @@ app.get('/add_med', function (req, res) {
 app.post('/add-med-form', function (req, res) {
     let data = req.body;
 
-    query1 = `INSERT INTO Medications(medication_name, medication_type) VALUES('${data['input - med - name']}', '${data['input - med - type']}')`;
+    query1 = `INSERT INTO Medications(medication_name, medication_type) VALUES('${data['input-med-name']}', '${data['input-med-type']}')`;
     db.pool.query(query1, function (error, rows, fields) {
 
         if (error) {
@@ -316,7 +316,7 @@ app.get('/edit_med', function (req, res) {
 app.post('/edit-med-form', function (req, res) {
     let data = req.body;
 
-    query1 = `UPDATE Medications SET medication_name = '${data['input - med - name']}', medication_type = '${data['input - med - type']}' WHERE medication_id = '${data['input - med - id']}'; `
+    query1 = `UPDATE Medications SET medication_name = '${data['input-med-name']}', medication_type = '${data['input-med-type']}' WHERE medication_id = '${data['input-med-id']}'; `
     db.pool.query(query1, function (error, rows, fields) {
         if (error) {
             console.log(error)
@@ -408,7 +408,7 @@ app.post('/add-appt-form', function (req, res) {
     let data = req.body
     let script_ids = data['input-script-id'];
     // insert into appointments
-    query1 = `INSERT INTO Appointments(patient_id, doctor_id, reason_for_appt, date, time) VALUES('${data['input - patient - select']}', '${data['input - doctor - select']}', '${data['input - appt - reason']}', '${data['input - appt - date']}', '${data['input - appt - time']}'); `
+    query1 = `INSERT INTO Appointments(patient_id, doctor_id, reason_for_appt, date, time) VALUES('${data['input-patient-select']}', '${data['input-doctor-select']}', '${data['input-appt-reason']}', '${data['input-appt-date']}', '${data['input-appt-time']}'); `
     // insert into intersection table
     db.pool.query(query1, function (error, rows, fields) {
         apt = rows;
@@ -483,12 +483,12 @@ app.post('/edit-appt-form', function (req, res) {
     let script_ids = data['edit-script-id'] || [];
     console.log(script_ids)
 
-    query1 = `UPDATE Appointments SET patient_id = '${data['edit - patient - select']}', doctor_id = '${data['edit - doctor - select']}', reason_for_appt = '${data['edit - appt - reason']}', date = '${data['edit - appt - date']}', time = '${data['edit - appt - time']}' WHERE appt_id = '${data['edit - appt - id']}'; `
+    query1 = `UPDATE Appointments SET patient_id = '${data['edit-patient-select']}', doctor_id = '${data['edit-doctor-select']}', reason_for_appt = '${data['edit-appt-reason']}', date = '${data['edit-appt-date']}', time = '${data['edit-appt-time']}' WHERE appt_id = '${data['edit-appt-id']}'; `
     db.pool.query(query1, function (error, rows, fields) {
-        query2 = `DELETE FROM Appts_has_Scripts WHERE appt_id = '${data['edit - appt - id']}'; `
+        query2 = `DELETE FROM Appts_has_Scripts WHERE appt_id = '${data['edit-appt-id']}'; `
         db.pool.query(query2, function (error, rows, fields) {
             for (let script_id of script_ids) {
-                query3 = `INSERT INTO Appts_has_Scripts(appt_id, script_id) VALUES('${data['edit - appt - id']}', '${parseInt(script_id)}'); `
+                query3 = `INSERT INTO Appts_has_Scripts(appt_id, script_id) VALUES('${data['edit-appt-id']}', '${parseInt(script_id)}'); `
                 db.pool.query(query3, function (error, rows, fields) {
                     if (error) {
                         console.log(error);
@@ -548,7 +548,7 @@ app.get('/add_script', function (req, res) {
 
 app.post('/add-script-form', function (req, res) {
     let data = req.body;
-    query1 = `INSERT INTO Prescriptions(medication_id, dosage, instructions) VALUES('${data['input - prescription - name']}', '${data['input - dosage']}', '${data['input - instructions']}')`;
+    query1 = `INSERT INTO Prescriptions(medication_id, dosage, instructions) VALUES('${data['input-prescription-name']}', '${data['input-dosage']}', '${data['input-instructions']}')`;
     db.pool.query(query1, function (error, rows, fields) {
         if (error) {
             console.log(error);
@@ -612,7 +612,7 @@ app.get('/edit_script', function (req, res) {
 app.post('/edit-script-form', function (req, res) {
     let data = req.body;
 
-    query1 = `UPDATE Prescriptions SET medication_id = '${data['input - med - id']}', dosage = '${data['input - dosage']}', instructions = '${data['input - instructions']}' WHERE script_id = '${data['input - script - id']}'; `
+    query1 = `UPDATE Prescriptions SET medication_id = '${data['input-med-id']}', dosage = '${data['input-dosage']}', instructions = '${data['input-instructions']}' WHERE script_id = '${data['input-script-id']}'; `
     db.pool.query(query1, function (error, rows, fields) {
         if (error) {
             console.log(error)
