@@ -1,3 +1,10 @@
+/* 
+   Citation for the following file:
+   Date: 12/05/2022
+   Based on:
+   Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
+
 /*
     SETUP
 */

@@ -1,3 +1,9 @@
+/* 
+   Citation for the following functions:
+   Date: 12/05/2022
+   Based on:
+   Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
 function deleteDoctor(doctorID) {
     let link = '/delete-doctor-ajax/';
     let data = {
