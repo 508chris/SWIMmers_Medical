@@ -587,7 +587,7 @@ app.delete('/delete-prescription-ajax/', function (req, res, next) {
 
 
 app.get('/edit_script', function (req, res) {
-    let query2 = `SELECT * FROM Medications; `
+    let query2 = `SELECT * FROM Medications;`
     let query1 = `SELECT Medications.medication_id, Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE script_id = "${req.query.edit_script_id}%"; `;
 
     db.pool.query(query1, function (error, rows, fields) {
@@ -602,7 +602,7 @@ app.get('/edit_script', function (req, res) {
 app.post('/edit-script-form', function (req, res) {
     let data = req.body;
 
-    query1 = `UPDATE Prescriptions SET medication_id = '${data['input - med - id']}', dosage = '${data['input - dosage']}', instructions = '${data['input - instructions']}' WHERE script_id = '${data['input - script - id']}'; `
+    query1 = `UPDATE Prescriptions SET medication_id = '${data['input-med-id']}', dosage = '${data['input-dosage']}', instructions = '${data['input-instructions']}' WHERE script_id = '${data['input-script-id']}'; `
     db.pool.query(query1, function (error, rows, fields) {
         if (error) {
             console.log(error)
