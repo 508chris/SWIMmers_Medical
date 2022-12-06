@@ -1,3 +1,9 @@
+/* 
+   Citation for the following functions:
+   Date: 12/05/2022
+   Based on:
+   Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
 function deletePrescription(scriptID) {
     let link = '/delete-prescription-ajax/';
     let data = {

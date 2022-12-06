@@ -1,4 +1,9 @@
-
+/* 
+   Citation for the following functions:
+   Date: 12/05/2022
+   Based on:
+   Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
 
 function editPatient(patientID) {
     let link = '/put-patient-ajax/';
