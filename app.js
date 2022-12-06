@@ -446,14 +446,13 @@ app.delete('/delete-appt-ajax/', function (req, res, next) {
 
 
 app.get('/edit_appt', function (req, res) {
-    let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Patients.patient_id, Doctors.Doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.appt_id, Appointments.reason_for_appt, DATE_FORMAT(Appointments.date, "%Y-%m-%d") AS date, DATE_FORMAT(Appointments.time, "%h:%i:%s") AS time, Medications.medication_name, group_concat(Medications.medication_name separator ', ') AS 'list', Prescriptions.script_id, group_concat(Prescriptions.script_id separator ', ') AS 'script_list', group_concat(Prescriptions.dosage separator ', ') AS 'dosage_list' FROM Appointments LEFT OUTER JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id LEFT OUTER JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Appts_has_Scripts on Appointments.appt_id = Appts_has_Scripts.appt_id LEFT OUTER JOIN Prescriptions ON Appts_has_Scripts.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications ON Prescriptions.medication_id = Medications.medication_id WHERE Appointments.appt_id = "${req.query.edit_appt_id}%";`
-    let query2 = `SELECT Patients.patient_id, Patients.first_name AS patient_first, Patients.last_name AS patient_last FROM Patients;`
+    let query1 = `SELECT Patients.first_name AS patient_first, Patients.last_name AS patient_last, Patients.patient_id, Doctors.doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last, Appointments.appt_id, Appointments.reason_for_appt, DATE_FORMAT(Appointments.date, "%Y-%m-%d") AS date, DATE_FORMAT(Appointments.time, "%h:%i:%s") AS time, Medications.medication_name, group_concat(Medications.medication_name separator ', ') AS 'list', Prescriptions.script_id, group_concat(Prescriptions.script_id separator ', ') AS 'script_list', group_concat(Prescriptions.dosage separator ', ') AS 'dosage_list' FROM Appointments LEFT OUTER JOIN Doctors on Appointments.doctor_id = Doctors.doctor_id LEFT OUTER JOIN Patients ON Appointments.patient_id = Patients.patient_id LEFT OUTER JOIN Appts_has_Scripts on Appointments.appt_id = Appts_has_Scripts.appt_id LEFT OUTER JOIN Prescriptions ON Appts_has_Scripts.script_id = Prescriptions.script_id LEFT OUTER JOIN Medications ON Prescriptions.medication_id = Medications.medication_id WHERE Appointments.appt_id = "${req.query.edit_appt_id}%";`
+    let query2 = `SELECT Patients.patient_id, Patients.first_name AS patient_first, Patients.last_name AS patient_last FROM Patients ORDER BY last_name ASC;`
     let query3 = `SELECT Doctors.doctor_id, Doctors.first_name AS doctor_first, Doctors.last_name AS doctor_last FROM Doctors;`
     let query4 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id;`
 
     db.pool.query(query1, function (error, rows, fields) {
         let curr_appt = rows;
-        console.log(curr_appt)
         db.pool.query(query2, function (error, rows, fields) {
             let patients = rows
             db.pool.query(query3, function (error, rows, fields) {
@@ -467,6 +466,25 @@ app.get('/edit_appt', function (req, res) {
     })
 });
 
+app.post('/edit-appt-form', function (req, res) {
+    let data = req.body;
+    let script_ids = data['edit-script-id'];
+    console.log(script_ids)
+
+    query1 = `UPDATE Appointments SET patient_id = '${data['edit-patient-select']}', doctor_id =  '${data['edit-doctor-select']}', reason_for_appt =  '${data['edit-appt-reason']}', date = '${data['edit-appt-date']}', time = '${data['edit-appt-time']}' WHERE appt_id = '${data['edit-appt-id']}';`
+    db.pool.query(query1, function (error, rows, fields) {
+        query2 = `DELETE FROM Appts_has_Scripts WHERE appt_id = '${data['edit-appt-id']}';`
+        db.pool.query(query2, function (error, rows, fields) {
+            if (error) {
+                console.log(error)
+                res.sendStatus(400)
+            }
+        })
+
+
+        res.redirect('/appointments')
+    })
+});
 
 
 
@@ -483,7 +501,7 @@ app.get('/prescriptions', function (req, res) {
     }
 
     else {
-        query1 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE medication_name LIKE "${req.query.prescription_name}%";`
+        query1 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE medication_name LIKE "${req.query.prescription_name}%"; `
     }
 
     db.pool.query(query1, function (error, rows, fields) {
@@ -497,8 +515,8 @@ app.get('/prescriptions', function (req, res) {
 
 
 app.get('/add_script', function (req, res) {
-    let query1 = `SELECT * FROM Prescriptions;`
-    let query2 = `SELECT * FROM Medications;`
+    let query1 = `SELECT * FROM Prescriptions; `
+    let query2 = `SELECT * FROM Medications; `
 
     db.pool.query(query1, function (error, rows, fields) {
         let prescriptions = rows;
@@ -514,7 +532,7 @@ app.get('/add_script', function (req, res) {
 
 app.post('/add-script-form', function (req, res) {
     let data = req.body;
-    query1 = `INSERT INTO Prescriptions (medication_id, dosage, instructions) VALUES ('${data['input-prescription-name']}', '${data['input-dosage']}', '${data['input-instructions']}')`;
+    query1 = `INSERT INTO Prescriptions(medication_id, dosage, instructions) VALUES('${data['input - prescription - name']}', '${data['input - dosage']}', '${data['input - instructions']}')`;
     db.pool.query(query1, function (error, rows, fields) {
         if (error) {
             console.log(error);
@@ -530,7 +548,7 @@ app.post('/add-script-form', function (req, res) {
 
 app.get('/delete_scripts', function (req, res) {
 
-    let query1 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE script_id = "${req.query.delete_script_id}%";`;
+    let query1 = `SELECT Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE script_id = "${req.query.delete_script_id}%"; `;
 
     db.pool.query(query1, function (error, rows, fields) {
         let script = rows;
@@ -543,7 +561,7 @@ app.get('/delete_scripts', function (req, res) {
 app.delete('/delete-prescription-ajax/', function (req, res, next) {
     let data = req.body;
     let scriptID = parseInt(data.script_id);
-    let deletePrescription = `DELETE FROM Prescriptions WHERE script_id = ?;`;
+    let deletePrescription = `DELETE FROM Prescriptions WHERE script_id = ?; `;
     // Run the 1st query
     db.pool.query(deletePrescription, [scriptID], function (error, rows, fields) {
         if (error) {
@@ -563,8 +581,8 @@ app.delete('/delete-prescription-ajax/', function (req, res, next) {
 
 
 app.get('/edit_script', function (req, res) {
-    let query2 = `SELECT * FROM Medications;`
-    let query1 = `SELECT Medications.medication_id, Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE script_id = "${req.query.edit_script_id}%";`;
+    let query2 = `SELECT * FROM Medications; `
+    let query1 = `SELECT Medications.medication_id, Medications.medication_name, Prescriptions.script_id, Prescriptions.dosage, Prescriptions.instructions FROM Medications JOIN Prescriptions ON Medications.medication_id = Prescriptions.medication_id WHERE script_id = "${req.query.edit_script_id}%"; `;
 
     db.pool.query(query1, function (error, rows, fields) {
         let curr_med = rows;
@@ -578,7 +596,7 @@ app.get('/edit_script', function (req, res) {
 app.post('/edit-script-form', function (req, res) {
     let data = req.body;
 
-    query1 = `UPDATE Prescriptions SET medication_id = '${data['input-med-id']}', dosage = '${data['input-dosage']}', instructions = '${data['input-instructions']}' WHERE script_id = '${data['input-script-id']}';`
+    query1 = `UPDATE Prescriptions SET medication_id = '${data['input - med - id']}', dosage = '${data['input - dosage']}', instructions = '${data['input - instructions']}' WHERE script_id = '${data['input - script - id']}'; `
     db.pool.query(query1, function (error, rows, fields) {
         if (error) {
             console.log(error)
