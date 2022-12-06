@@ -474,7 +474,7 @@ app.get('/edit_appt', function (req, res) {
 
 app.post('/edit-appt-form', function (req, res) {
     let data = req.body;
-    let script_ids = data['edit-script-id'];
+    let script_ids = data['edit-script-id'] || [];
     console.log(script_ids)
 
     query1 = `UPDATE Appointments SET patient_id = '${data['edit-patient-select']}', doctor_id =  '${data['edit-doctor-select']}', reason_for_appt =  '${data['edit-appt-reason']}', date = '${data['edit-appt-date']}', time = '${data['edit-appt-time']}' WHERE appt_id = '${data['edit-appt-id']}';`
