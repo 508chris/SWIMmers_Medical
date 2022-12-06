@@ -42,12 +42,12 @@ app.get('/patients', function (req, res) {
 
     // If there is no query string, we just perform a basic SELECT
     if (req.query.last_name === undefined) {
-        query1 = "SELECT * FROM Patients;";
+        query1 = `SELECT patient_id, first_name, last_name, DATE_FORMAT(dob, "%m-%d-%Y") AS dob, address, email, phone_number, insurance FROM Patients;`;
     }
 
     // If there is a query string, we assume this is a search, and return desired results
     else {
-        query1 = `SELECT * FROM Patients WHERE last_name LIKE "${req.query.last_name}%"`
+        query1 = `SELECT patient_id, first_name, last_name, DATE_FORMAT(dob, "%m-%d-%Y") AS dob, address, email, phone_number, insurance FROM Patients WHERE last_name LIKE "${req.query.last_name}%"`
     }
 
     db.pool.query(query1, function (error, rows, fields) {    // Execute the query
